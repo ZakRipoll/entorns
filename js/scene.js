@@ -9,7 +9,7 @@ var mesh;
 
 var dimensio = 10;
 
-var basePlane;
+var basePlane;	
 
 function init()
 {	
@@ -44,7 +44,8 @@ function init()
 
 	scene.add( createAxis( ) );
 
-	camera.lookAt( scene.getObjectByName( "tauler" ).position );
+	//camera.lookAt( scene.getObjectByName( "tauler" ).position );
+	camera.lookAt( new Vector3(0,0,0) );
 };
 
 /* ********************************************************* CAMERA ********************************************************* */
@@ -90,7 +91,7 @@ function createLight( x, y, z, color, name )
 /* ********************************************************** AXIS ********************************************************** */
 function createAxis()
 {
-	var axis = new THREE.AxisHelper( dimensio );
+	var axis = new THREE.AxisHelper( dimensio*.5 );
 	axis.position.y = .01;
 	return axis;
 };
@@ -111,18 +112,37 @@ function createRenderer( width, height )
 /* ********************************************************* PLANE ********************************************************* */
 function createPlane()
 {
-	var squareT = new THREE.ImageUtils.loadTexture("imatges/square-thick.png");
+	/*var squareT = new THREE.ImageUtils.loadTexture("imatges/square-thick.png");
 	squareT.wrapS = squareT.wrapT = THREE.RepeatWrapping;
 	squareT.repeat.set( dimensio, dimensio );
+	var planeMat = new THREE.MeshBasicMaterial({map:squareT, color:0xbbbbbb});*/
 
-	var planeMat = new THREE.MeshBasicMaterial({map:squareT, color:0xbbbbbb});
+	/*var planeMat = new THREE.MeshLambertMaterial( { color: 0xbbbbbb } ); 
 	var planeGeo = new THREE.PlaneGeometry( dimensio, dimensio );
 	basePlane = new THREE.Mesh(planeGeo, planeMat);
 
 	basePlane.rotation.x = -Math.PI / 2;
 	basePlane.name = "tauler";
 
-	return basePlane;
+	return basePlane;*/
+
+	var geometry = new THREE.Geometry();
+geometry.vertices.push(new THREE.Vector3( - 500, 0, 0 ) );
+geometry.vertices.push(new THREE.Vector3( 500, 0, 0 ) );
+
+linesMaterial = new THREE.LineBasicMaterial( { color: 0x787878, opacity: .2, linewidth: .1 } );
+
+for ( var i = 0; i <= 20; i ++ ) {
+
+    var line = new THREE.Line( geometry, linesMaterial );
+    line.position.z = ( i * 50 ) - 500;
+    scene.add( line );
+
+    var line = new THREE.Line( geometry, linesMaterial );
+    line.position.x = ( i * 50 ) - 500;
+    line.rotation.y = 90 * Math.PI / 180;
+    scene.add( line );
+}
 };
 
 /* ********************************************************* SKYBOX ********************************************************* */
