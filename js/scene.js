@@ -2,35 +2,34 @@
 
 // standard global variables
 var container, scene, camera, renderer, controls, stats;
-var keyboard = new KeyboardState();
 var deltaTime = new THREE.Clock();
 
 // custom global variables
 var mesh;
 
 var dimensio = 10;
-var altitude = 15;
+
+var basePlane;
 
 function init()
 {	
 	scene = new THREE.Scene();
 	
 	container = document.getElementById( "ThreeJS" );
+	
+	var SCREEN_WIDTH = container.clientWidth;
 
-	var SCREEN_WIDTH = container.clientWidth, SCREEN_HEIGHT = container.clientHeight;
+	var SCREEN_HEIGHT = container.clientHeight;
 	
 	camera = createCamera( 45, SCREEN_WIDTH / SCREEN_HEIGHT, .1, 2000);
 
-	scene.add( camera );
+	camera.position.y = 15;
 
 	viewSet( view.top );
 
-	if ( Detector.webgl )
-		renderer = new THREE.WebGLRenderer( {antialias:true} );
-	else
-		renderer = new THREE.CanvasRenderer(); 
+	scene.add( camera );
 
-	renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+	renderer = createRenderer( SCREEN_WIDTH, SCREEN_HEIGHT );
 
 	container.appendChild( renderer.domElement );
 
@@ -39,19 +38,21 @@ function init()
 
 	scene.add( createLight( 100, 250, 100, 0xffffff ) );
 
-	scene.add( createSkybox() );
+	scene.add( createSkybox( ) );
 
-	scene.add( createAxis() );
+	scene.add( createPlane( ) );
 
-	scene.add( createPlane() );
+	scene.add( createAxis( ) );
 
 	camera.lookAt( scene.getObjectByName( "tauler" ).position );
 };
 
 /* ********************************************************* CAMERA ********************************************************* */
-function createCamera( angle, aspect, near, far )
+function createCamera( angle, aspect, near, far, name )
 {
-	return new THREE.PerspectiveCamera( angle, aspect, near, far );
+	var camera = new THREE.PerspectiveCamera( angle, aspect, near, far );
+	camera.name = name || "camera";
+	return camera;
 };
 
 function viewSet( position )
@@ -64,7 +65,13 @@ function viewSet( position )
 
 		case view.top:
 
-		camera.position.set( 0, 15, 0 );
+		camera.position.set( 0, camera.position.y, 0 );
+
+		break;
+
+		case view.bottom:
+
+		camera.position.set( 0, -camera.position.y, 0 );
 
 		break;
 
@@ -72,11 +79,11 @@ function viewSet( position )
 };
 
 /* ********************************************************* LIGHT ********************************************************* */
-function createLight( x, y, z, color )
+function createLight( x, y, z, color, name )
 {
-	var color = color || 0xff0000; 
-	var light = new THREE.PointLight( color );
+	var light = new THREE.PointLight( color || 0xff0000 );
 	light.position.set( x, y, z );
+	light.name = name || "light";
 	return light;
 };
 
@@ -84,19 +91,33 @@ function createLight( x, y, z, color )
 function createAxis()
 {
 	var axis = new THREE.AxisHelper( dimensio );
-	axis.position.y = 0.01;
+	axis.position.y = .01;
 	return axis;
 };
 
+/* ******************************************************** RENDERE ******************************************************** */
+function createRenderer( width, height )
+{
+	if ( Detector.webgl )
+		renderer = new THREE.WebGLRenderer( {antialias:true} );
+	else
+		renderer = new THREE.CanvasRenderer(); 
+
+	renderer.setSize( width, height );
+
+	return renderer;
+};
+
+/* ********************************************************* PLANE ********************************************************* */
 function createPlane()
 {
-	var squareT 	= new THREE.ImageUtils.loadTexture("imatges/square-thick.png");
-	squareT.wrapS 	= squareT.wrapT = THREE.RepeatWrapping;
+	var squareT = new THREE.ImageUtils.loadTexture("imatges/square-thick.png");
+	squareT.wrapS = squareT.wrapT = THREE.RepeatWrapping;
 	squareT.repeat.set( dimensio, dimensio );
 
-	var planeGeo 	= new THREE.PlaneGeometry( dimensio, dimensio );
-	var planeMat 	= new THREE.MeshBasicMaterial({map:squareT, color:0xbbbbbb});
-	var basePlane 	= new THREE.Mesh(planeGeo, planeMat);
+	var planeMat = new THREE.MeshBasicMaterial({map:squareT, color:0xbbbbbb});
+	var planeGeo = new THREE.PlaneGeometry( dimensio, dimensio );
+	basePlane = new THREE.Mesh(planeGeo, planeMat);
 
 	basePlane.rotation.x = -Math.PI / 2;
 	basePlane.name = "tauler";
@@ -107,8 +128,8 @@ function createPlane()
 /* ********************************************************* SKYBOX ********************************************************* */
 function createSkybox()
 {
-	var skyBoxGeometry = new THREE.CubeGeometry( 1000, 1000, 1000 );
 	var skyBoxMaterial = new THREE.MeshBasicMaterial( { color: 0x4bbcfa, side: THREE.BackSide } );
+	var skyBoxGeometry = new THREE.CubeGeometry( 1000, 1000, 1000 );
 	return new THREE.Mesh( skyBoxGeometry, skyBoxMaterial );
 };
 
