@@ -1,7 +1,7 @@
 /* ************************************** google-chrome --allow-file-access-from-files ************************************** */
 
 // standard global variables
-var container, scene, camera, renderer, controls, stats;
+var container, scene, camera, renderer, controls, stats, geometry;
 var deltaTime = new THREE.Clock();
 
 // custom global variables
@@ -111,41 +111,21 @@ function createRenderer( width, height )
 /* ********************************************************* PLANE ********************************************************* */
 function createPlane()
 {
-	if( true )
-	{
-	var squareT = new THREE.ImageUtils.loadTexture("imatges/square-thick.png");
-	squareT.wrapS = squareT.wrapT = THREE.RepeatWrapping;
-	squareT.repeat.set( dimensio, dimensio );
-	var planeMat = new THREE.MeshBasicMaterial({map:squareT, color:0xbbbbbb});
-	}
-	else
-	var planeMat = new THREE.MeshLambertMaterial( { color: 0xbbbbbb } ); 
+	geometry = new THREE.PlaneGeometry(dimensio, dimensio, dimensio, dimensio );
 
-	var planeGeo = new THREE.PlaneGeometry( dimensio, dimensio );
-	basePlane = new THREE.Mesh(planeGeo, planeMat);
+	createSea()
+
+	var material = new THREE.MeshPhongMaterial({
+		color: 0xffffff, 
+		wireframe: true
+	});
+
+	var basePlane = new THREE.Mesh(geometry, material);	
 
 	basePlane.rotation.x = -Math.PI / 2;
 	basePlane.name = "tauler";
 
 	return basePlane;
-
-	/*var geometry = new THREE.Geometry();
-	geometry.vertices.push(new THREE.Vector3( - 500, 0, 0 ) );
-	geometry.vertices.push(new THREE.Vector3( 500, 0, 0 ) );
-
-	linesMaterial = new THREE.LineBasicMaterial( { color: 0x787878, opacity: .2, linewidth: .1 } );
-
-	for ( var i = 0; i <= 20; i ++ ) {
-
-		var line = new THREE.Line( geometry, linesMaterial );
-		line.position.z = ( i * 50 ) - 500;
-		scene.add( line );
-
-		var line = new THREE.Line( geometry, linesMaterial );
-		line.position.x = ( i * 50 ) - 500;
-		line.rotation.y = 90 * Math.PI / 180;
-		scene.add( line );
-	}*/
 };
 
 /* ********************************************************* SKYBOX ********************************************************* */
@@ -165,10 +145,19 @@ function wobble()
 	geometry.verticesNeedUpdate = true;
 	geometry.colorsNeedUpdate = true;
 };
+/* ******************************************************** CRATESEA ******************************************************** */
+function createSea()
+{
+	for (var i = 0, l = geometry.vertices.length; i < l; i++)
+		geometry.vertices[i].z = Math.random();
+	geometry.verticesNeedUpdate = true;
+};
 
 /* ********************************************************* RENDER ********************************************************* */
 function render()
 {
+	createSea();
+
 	requestAnimationFrame( render );
 
 	renderer.render(scene, camera);
