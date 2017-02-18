@@ -1,7 +1,7 @@
 /* ************************************** google-chrome --allow-file-access-from-files ************************************** */
 
 // standard global variables
-var container, scene, camera, renderer, controls, stats, geometry;
+var container, scene, camera, renderer, controls, stats, geometry, material, cube, basePlane;
 var deltaTime = new THREE.Clock();
 
 // custom global variables
@@ -43,6 +43,8 @@ function init()
 	scene.add( createPlane( ) );
 
 	scene.add( createAxis( ) );
+
+	scene.add( createCube( ) );
 
 	camera.lookAt( scene.getObjectByName( "tauler" ).position );
 };
@@ -113,14 +115,13 @@ function createPlane()
 {
 	geometry = new THREE.PlaneGeometry(dimensio, dimensio, dimensio, dimensio );
 
-	createSea()
 
-	var material = new THREE.MeshPhongMaterial({
+	material = new THREE.MeshPhongMaterial({
 		color: 0xffffff, 
 		wireframe: true
 	});
 
-	var basePlane = new THREE.Mesh(geometry, material);	
+	basePlane = new THREE.Mesh(geometry, material);	
 
 	basePlane.rotation.x = -Math.PI / 2;
 	basePlane.name = "tauler";
@@ -131,32 +132,43 @@ function createPlane()
 /* ********************************************************* SKYBOX ********************************************************* */
 function createSkybox()
 {
-	var skyBoxMaterial = new THREE.MeshBasicMaterial( { color: 0x4bbcfa, side: THREE.BackSide } );
+	var skyBoxMaterial = new THREE.MeshBasicMaterial( { color: seaColors.original, side: THREE.BackSide } );
 	var skyBoxGeometry = new THREE.CubeGeometry( 1000, 1000, 1000 );
 	return new THREE.Mesh( skyBoxGeometry, skyBoxMaterial );
 };
 
-/* ********************************************************* WAVES ********************************************************* */
-function wobble()
+/* ******************************************************** CRATESEA ******************************************************** */
+function createSea()
 {
-	for(var i=0; i < verts.length; i++)
-		verts[i].z = Math.sin( deltaTime );
+	var random;
+
+	for (var i = 0, l = geometry.vertices.length; i < l; i++)
+	{
+		random = Math.random();
+
+		geometry.vertices[i].z = random;
+
+		/*if( random < .25 ) geometry.face[ i ].color.setHex( = seaColors.ligher );
+		else if( random < .5 ) geometry.face[ i ].color.setHex( = seaColors.original );
+		else if( random < .75 ) geometry.face[ i ].color.setHex( = seaColors.darker );
+		else geometry.face[ i ].color.setHex( = seaColors.grayscale );*/
+	}
 
 	geometry.verticesNeedUpdate = true;
 	geometry.colorsNeedUpdate = true;
 };
-/* ******************************************************** CRATESEA ******************************************************** */
-function createSea()
+
+function createCube( mouse )
 {
-	for (var i = 0, l = geometry.vertices.length; i < l; i++)
-		geometry.vertices[i].z = Math.random();
-	geometry.verticesNeedUpdate = true;
+	cube = new THREE.Mesh( new THREE.CubeGeometry( 1, 1, 1 ), new THREE.MeshNormalMaterial() );
+
+	scene.add( cube );
 };
 
 /* ********************************************************* RENDER ********************************************************* */
 function render()
 {
-	createSea();
+	//createSea();
 
 	requestAnimationFrame( render );
 
