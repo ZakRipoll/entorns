@@ -1,15 +1,5 @@
 /* ************************************** google-chrome --allow-file-access-from-files ************************************** */
-
-// standard global variables
-var container, scene, camera, renderer, controls, stats, geometry, material, cube, basePlane;
-var deltaTime = new THREE.Clock();
-
-// custom global variables
-var mesh;
-
-var dimensio = 10;
-
-var basePlane;	
+var container, scene, camera, renderer,  geometry, material, cube, basePlane, dimensio = 10;
 
 function init()
 {	
@@ -44,7 +34,11 @@ function init()
 
 	scene.add( createAxis( ) );
 
-	scene.add( createCube( ) );
+	cube =  createCube( );
+
+	scene.add( cube );
+
+	scene.add( createOBJ.example );
 
 	camera.lookAt( scene.getObjectByName( "tauler" ).position );
 };
@@ -76,7 +70,6 @@ function viewSet( position )
 		camera.position.set( 0, -camera.position.y, 0 );
 
 		break;
-
 	};
 };
 
@@ -92,7 +85,7 @@ function createLight( x, y, z, color, name )
 /* ********************************************************** AXIS ********************************************************** */
 function createAxis()
 {
-	var axis = new THREE.AxisHelper( dimensio*.5 );
+	var axis = new THREE.AxisHelper( dimensio * .5 );
 	axis.position.y = .01;
 	return axis;
 };
@@ -113,15 +106,11 @@ function createRenderer( width, height )
 /* ********************************************************* PLANE ********************************************************* */
 function createPlane()
 {
-	geometry = new THREE.PlaneGeometry(dimensio, dimensio, dimensio, dimensio );
+	geometry = new THREE.PlaneGeometry( dimensio, dimensio, dimensio, dimensio );
 
+	material = new THREE.MeshPhongMaterial( {color: 0xffffff, wireframe: true });
 
-	material = new THREE.MeshPhongMaterial({
-		color: 0xffffff, 
-		wireframe: true
-	});
-
-	basePlane = new THREE.Mesh(geometry, material);	
+	basePlane = new THREE.Mesh( geometry, material );	
 
 	basePlane.rotation.x = -Math.PI / 2;
 	basePlane.name = "tauler";
@@ -148,10 +137,10 @@ function createSea()
 
 		geometry.vertices[i].z = random;
 
-		/*if( random < .25 ) geometry.face[ i ].color.setHex( = seaColors.ligher );
-		else if( random < .5 ) geometry.face[ i ].color.setHex( = seaColors.original );
-		else if( random < .75 ) geometry.face[ i ].color.setHex( = seaColors.darker );
-		else geometry.face[ i ].color.setHex( = seaColors.grayscale );*/
+		/*if( random < .25 ) geometry.face[ i ].color.setHex( seaColors.ligher );
+		else if( random < .5 ) geometry.face[ i ].color.setHex( seaColors.original );
+		else if( random < .75 ) geometry.face[ i ].color.setHex( seaColors.darker );
+		else geometry.face[ i ].color.setHex( seaColors.grayscale );*/
 	}
 
 	geometry.verticesNeedUpdate = true;
@@ -160,9 +149,7 @@ function createSea()
 
 function createCube( mouse )
 {
-	cube = new THREE.Mesh( new THREE.CubeGeometry( 1, 1, 1 ), new THREE.MeshNormalMaterial() );
-
-	scene.add( cube );
+	return new THREE.Mesh( new THREE.CubeGeometry( 1, 1, 1 ), new THREE.MeshNormalMaterial() );
 };
 
 /* ********************************************************* RENDER ********************************************************* */
