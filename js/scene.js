@@ -4,6 +4,8 @@ var container, scene, camera, renderer,  geometry, material, cube, basePlane, di
 function init()
 {	
 	scene = new THREE.Scene();
+
+	scene.add( createBoat() );
 	
 	container = document.getElementById( "ThreeJS" );
 	
@@ -11,9 +13,9 @@ function init()
 
 	var SCREEN_HEIGHT = container.clientHeight;
 	
-	camera = createCamera( 45, SCREEN_WIDTH / SCREEN_HEIGHT, .1, 2000);
+	camera = createCamera( 45, SCREEN_WIDTH / SCREEN_HEIGHT, .1, 5000);
 
-	camera.position.y = 15;
+	camera.position.y = 1500;
 
 	viewSet( view.top );
 
@@ -26,7 +28,7 @@ function init()
 	THREEx.WindowResize(renderer, camera);
 	THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) });
 
-	scene.add( createLight( 100, 250, 100, 0xffffff ) );
+	scene.add( createLight( 0, 1000, 0, 0xffffff ) );
 
 	scene.add( createSkybox( ) );
 
@@ -34,11 +36,9 @@ function init()
 
 	scene.add( createAxis( ) );
 
-	cube =  createCube( );
+	cube = debug.createCube( );
 
 	scene.add( cube );
-
-	scene.add( createOBJ.example );
 
 	camera.lookAt( scene.getObjectByName( "tauler" ).position );
 };
@@ -85,7 +85,7 @@ function createLight( x, y, z, color, name )
 /* ********************************************************** AXIS ********************************************************** */
 function createAxis()
 {
-	var axis = new THREE.AxisHelper( dimensio * .5 );
+	var axis = new THREE.AxisHelper( 500 );
 	axis.position.y = .01;
 	return axis;
 };
@@ -106,7 +106,7 @@ function createRenderer( width, height )
 /* ********************************************************* PLANE ********************************************************* */
 function createPlane()
 {
-	geometry = new THREE.PlaneGeometry( dimensio, dimensio, dimensio, dimensio );
+	geometry = new THREE.PlaneGeometry( 1000, 1000, dimensio, dimensio );
 
 	material = new THREE.MeshPhongMaterial( {color: 0xffffff, wireframe: true });
 
@@ -122,7 +122,7 @@ function createPlane()
 function createSkybox()
 {
 	var skyBoxMaterial = new THREE.MeshBasicMaterial( { color: seaColors.original, side: THREE.BackSide } );
-	var skyBoxGeometry = new THREE.CubeGeometry( 1000, 1000, 1000 );
+	var skyBoxGeometry = new THREE.CubeGeometry( 2000, 2000, 2000 );
 	return new THREE.Mesh( skyBoxGeometry, skyBoxMaterial );
 };
 
@@ -147,10 +147,17 @@ function createSea()
 	geometry.colorsNeedUpdate = true;
 };
 
-function createCube( mouse )
+function createBoat()
 {
-	return new THREE.Mesh( new THREE.CubeGeometry( 1, 1, 1 ), new THREE.MeshNormalMaterial() );
-};
+	
+	var loader = new THREE.OBJLoader( );
+	loader.load( 'imatges/boat.obj', function ( object ) 
+	{
+
+		object.name = "Boat";
+		scene.add( object );
+	});
+}
 
 /* ********************************************************* RENDER ********************************************************* */
 function render()
@@ -161,5 +168,6 @@ function render()
 
 	renderer.render(scene, camera);
 };
+
 init();
 render();
