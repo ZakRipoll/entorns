@@ -1,5 +1,5 @@
 /* ************************************** google-chrome --allow-file-access-from-files ************************************** */
-var container, scene, camera, renderer,  geometry, material, cube, basePlane, dimensio = 10;
+var container, scene, camera, renderer, geometry, material, cube, basePlane, dimensio = 10, c = 0, amplada = 5
 
 function init()
 {	
@@ -15,9 +15,11 @@ function init()
 	
 	camera = factory.createCamera( 45, SCREEN_WIDTH / SCREEN_HEIGHT, .1, 5000);
 
-	camera.position.y = 1500;
+	//camera.position.y = 150 * dimensio;
 
-	viewSet( view.top );
+	camera.position.set( 0, 150 * dimensio, 0 );
+
+	//viewSet( view.top );
 
 	scene.add( camera );
 
@@ -28,19 +30,20 @@ function init()
 	THREEx.WindowResize(renderer, camera);
 	THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) });
 
-	scene.add( factory.createLight( 0, 1000, 0, 0xffffff ) );
+	scene.add( factory.createLight( 0, 100 * dimensio, 0, 0xffffff ) );
 
 	scene.add( factory.createSkybox( ) );
 
-	scene.add( factory.createPlane( ) );
+	scene.add( factory.createPlane( dimensio ) );
 
 	scene.add( factory.createAxis( ) );
 
-	cube = debug.createCube( );
+	cube = debug.createCube( amplada || 1 );
 
 	scene.add( cube );
 
 	camera.lookAt( scene.getObjectByName( "tauler" ).position );
+
 };
 
 /* ********************************************************* CAMERA ********************************************************* */
@@ -71,7 +74,7 @@ function viewSet( position )
 /* ********************************************************* RENDER ********************************************************* */
 function render()
 {
-	factory.createSea();
+	factory.createSea( c++ );
 
 	requestAnimationFrame( render );
 
