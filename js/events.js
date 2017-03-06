@@ -1,46 +1,52 @@
-var lastMousePosition = new THREE.Vector2( 0, 0 ), pos, c = 0;
+var lastMousePosition = new THREE.Vector2( 0, 0 ), pos, c = 0, comprovacio;
 
-/* ********************************************************* WHEEL ********************************************************* */
-container.addEventListener('wheel', function(e) 
+/* ******************************************************** WHEEL ******************************************************** */
+container.addEventListener('wheel', function(e)
 {
 	useWheel( e.wheelDelta > 0 ? true : false );
 
 }, false);
 
-/* ******************************************************* MOUSEMOVE ******************************************************* */
-container.addEventListener('mousemove', function(e) 
+/* ****************************************************** MOUSEMOVE ****************************************************** */
+container.addEventListener('mousemove', function(e)
 {
 	pos = positionate( raycasting( e.offsetX, e.offsetY ) );
 
-	cube.position.x = onTauler( pos.x );
-	cube.position.y = dimensio * 5;
-	cube.position.z = onTauler( pos.z );
+	actual.position.x = onTauler( pos.x );
+	actual.position.y = dimensio * 5;
+	actual.position.z = onTauler( pos.z );
+
+	console.log( pos.x + ", " + pos.z );
 
 }, false);
 
 container.addEventListener('mousedown', function(e)
 {
-	if( dintreTauler() )
+	if( !dintreTauler() )
+		return;
 
-		debug.createCubeRay( pos.x, 50, pos.z, 2, 0 );
+	var boat = factory.createBoat( 'imatges/boat.obj', "Boat" );
+	boat.position.set( pos.x, 50, pos.z );
+	debug.actualPosition( boat );
+	scene.add( boat );
 
 }, false);
 
-container.addEventListener("mouseout", function(e) 
+container.addEventListener("mouseout", function(e)
 {
 
 }, false);
 
-container.addEventListener("mouseup", function(e) 
+container.addEventListener("mouseup", function(e)
 {
 
 }, false);
 
-/* ****************************************************** RAY TRAICING ***************************************************** */
+/* ***************************************************** RAY TRAICING **************************************************** */
 function raycasting( x, y )
 {
 	var raycaster = new THREE.Raycaster();
-	var screenMouse = new THREE.Vector2( ( x / container.childNodes[0].width ) * 2 - 1, 
+	var screenMouse = new THREE.Vector2( ( x / container.childNodes[0].width ) * 2 - 1,
 										-( y / container.childNodes[0].height ) * 2 + 1 );
 
 	raycaster.setFromCamera( screenMouse, camera );
@@ -53,34 +59,14 @@ function raycasting( x, y )
 
 	console.log( intersects )
 
+	if( intersects.length == 3)
+	{
+		comprovacio = intersects;
+		console.log( "S'ha de mirar de com posar el nom" );
+	}
+
 	return { x: intersects[ 0 ].point.x, z: intersects[ 0 ].point.z }
 };
-
-function onTauler( coord )
-{
-	if( coord > 500 )
-
-		coord = 450;
-
-	else if( coord < -500 )
-
-		coord = -450;
-
-	return coord;
-};
-
-function positionate( pos )
-{
-	var x = parseInt( pos.x - pos.x % 100 );
-	var z = parseInt( pos.z - pos.z % 100 );
-
-	return { x: pos.x > 0 ? x + 50 : x - 50, z: pos.z > 0 ? z + 50 : z - 50 }
-}
-
-function dintreTauler( )
-{
-	return ( -500 < Math.abs( pos.x ) && Math.abs( pos.x ) < 500 && -500 < Math.abs( pos.z ) && Math.abs( pos.z ) < 500 );
-}
 
 function intesectionInfinitePlane( x, y )
 {
@@ -108,7 +94,34 @@ function intesectionInfinitePlane( x, y )
 	return positionate( { x: intersects.x, z:intersects.z } )
 };
 
-/* ********************************************************** ZOOM ********************************************************** */
+/* *********************************************** POSITIONATE IN THE BOARD *********************************************** */
+function onTauler( coord )
+{
+	if( coord > 500 )
+
+		coord = 450;
+
+	else if( coord < -500 )
+
+		coord = -450;
+
+	return coord;
+};
+
+function positionate( pos )
+{
+	var x = parseInt( pos.x - pos.x % 100 );
+	var z = parseInt( pos.z - pos.z % 100 );
+
+	return { x: pos.x > 0 ? x + 50 : x - 50, z: pos.z > 0 ? z + 50 : z - 50 }
+}
+
+function dintreTauler( )
+{
+	return ( -500 < Math.abs( pos.x ) && Math.abs( pos.x ) < 500 && -500 < Math.abs( pos.z ) && Math.abs( pos.z ) < 500 );
+}
+
+/* ********************************************************* ZOOM ********************************************************* */
 function useWheel( move )
 {
 	var max = utils.max( camera.position.x, camera.position.y, camera.position.z );
@@ -153,7 +166,7 @@ function useWheel( move )
 	camera.lookAt( scene.getObjectByName( "tauler" ).position );
 };
 
-/* ********************************************************* CAMERA ********************************************************* */
+/* ******************************************************** CAMERA ******************************************************** */
 function useMouse( e, kind )
 {
 	var max = utils.max( camera.position.x, camera.position.y, camera.position.z ) * 100;
@@ -172,28 +185,28 @@ function useMouse( e, kind )
 
 		camera.position.x -= mouse.x;
 		camera.position.y += mouse.x;
-		
+
 		break;
 
 		case "XZ": //Vista des de'l a baix a la esquerra, mirat des de l'usuari
 
 		camera.position.x -= mouse.x;
 		camera.position.z -= mouse.y;
-		
+
 		break;
 
 		case "YZ": //Vista des de'l a baix el centre, mirat des de l'usuari
 
 		camera.position.y -= mouse.x;
 		camera.position.z += mouse.y;
-		
+
 		break;
 	};
 
 	camera.lookAt( scene.getObjectByName( "tauler" ).position );
 };
 
-/* ********************************************************* MOVES ********************************************************* */
+/* ******************************************************** MOVES ******************************************************** */
 function unitariMove( x, y )
 {
 	var mouse = new THREE.Vector2( 0, 0 );

@@ -1,0 +1,36 @@
+dintre de data hi posa les imatges
+dintre dels src es poden posar wbes, pots mirar de posar els de llibreria del three js i no tenir-es de baixar
+de moment amb el game i el server fa el mateix que ja feies, tot i que tots tenen una funcio init
+una encarregarda de inicialitzar-les totes, cridant l-init en l-order que les necessito
+
+en la classe joc joc
+int, player, el contador dels jugadors, s'afegiexen en el joc
+
+MVC, Model, View, Controler.
+
+les imatges han de ser 2 a la alguna cosa, per tan transformar amb el photoshop sera suficient.
+Per fer algunes imatges el que sol utilitzar son cubes, amb una de les cares que sigui molt mes petita que les altres.
+Mirar b'e les coordenades del sistema
+
+Pels jugadors crear un equip i diferencia de quin vandol estan li dona un variable que l-hi diu equip.
+dintre del fitxer de game hi ha posat tan el game com el player
+
+per les onades, mirar un sinus i el que fer es posar un dt al principi mirar com ho fem.
+
+fa un update general, el qual passa per tots els personatges que estan a l-escena i mira d'actualizar-los
+
+Pel que sembla fa els objectes i posa les dades que necessitara, per la resta de funcions posa el prototype
+
+mira si els caracters s'actualizen, i mirar on para el dispositiu, 
+
+un cop ha comprovat b'e tots els events de ratoli actualiza en el joc i el joc actualitza els jugadors, tal i com he dit abans
+
+mirar el vector director i aplicar un delta time per tal de que es pugi morure d'una manera una mica realista.
+
+Per ordre que s'ejecutara el codi per tal de fer el login i el sign up ben fet, tot aixo es pot copiar tranquilament del que ja teniem
+login
+el mon
+
+pel que sembla amb el render s'han de fer moltes coses, o siqui que ja pots començar-lo a ulititzar.
+
+en les funcions de  posicionat del barcos, posar unes funcions de to array per tal de poder passar les dades el més ràpid possible, o poder millor crar una classe position i posar tot el que necessitem allà, a més de mirar bé el que ja té fet el vector3 de three js.

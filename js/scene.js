@@ -1,25 +1,20 @@
 /* ************************************** google-chrome --allow-file-access-from-files ************************************** */
-var container, scene, camera, renderer, geometry, material, cube, basePlane, dimensio = 10, c = 0, amplada = 5
+var container, scene, camera, renderer, geometry, material, actual, basePlane;
+var dimensio = 10, c = 0, amplada = 5, rotations = 0
 
 function init()
-{	
+{
 	scene = new THREE.Scene();
 
-	scene.add( createOBJ.createBoat() );
-	
 	container = document.getElementById( "ThreeJS" );
-	
+
 	var SCREEN_WIDTH = container.clientWidth;
 
 	var SCREEN_HEIGHT = container.clientHeight;
-	
+
 	camera = factory.createCamera( 45, SCREEN_WIDTH / SCREEN_HEIGHT, .1, 5000);
 
-	//camera.position.y = 150 * dimensio;
-
 	camera.position.set( 0, 150 * dimensio, 0 );
-
-	//viewSet( view.top );
 
 	scene.add( camera );
 
@@ -38,43 +33,17 @@ function init()
 
 	scene.add( factory.createAxis( ) );
 
-	cube = debug.createCube( amplada || 1 );
+	actual = factory.createBoat( 'imatges/boat.obj', "Boat" );
 
-	scene.add( cube );
+	scene.add( actual );
 
 	camera.lookAt( scene.getObjectByName( "tauler" ).position );
-
 };
-
-/* ********************************************************* CAMERA ********************************************************* */
-function viewSet( position )
-{
-	switch( position )
-	{
-		case view.ground:
-
-		break; 
-
-		case view.top:
-
-		camera.position.set( 0, camera.position.y, 0 );
-
-		break;
-
-		case view.bottom:
-
-		camera.position.set( 0, -camera.position.y, 0 );
-
-		break;
-	};
-};
-
-
 
 /* ********************************************************* RENDER ********************************************************* */
 function render()
 {
-	factory.createSea( c++ );
+	animate.createSea( c++ );
 
 	requestAnimationFrame( render );
 

@@ -12,3 +12,11 @@ var seaColors =
 	darker: 0x004754,
 	grayscale: 0x383838
 };
+
+var direction = 
+{
+	up: 0,
+	right: 1,
+	down: 2,
+	left: 3
+};

@@ -1,4 +1,4 @@
-var utils = 
+var utils =
 {
 	max: function( x, y, z )
 	{
@@ -24,4 +24,3 @@ var utils =
 		return distance*.0001;
 	}
 };
-

@@ -9,7 +9,7 @@ var debug =
 
 	createCube: function ( size )
 	{
-		return new THREE.Mesh( 	new THREE.CubeGeometry( this.dimention, this.dimention, this.dimention * size ), 
+		return new THREE.Mesh( 	new THREE.CubeGeometry( this.dimention, this.dimention, this.dimention * size ),
 								new THREE.MeshNormalMaterial() );
 	},
 
@@ -27,5 +27,34 @@ var debug =
 		}
 
 		scene.add( cube );
+	},
+
+	/* ******************************************************* ROTATIONS ******************************************************* */
+	rotateRight: function ( boat )
+	{
+		boat.rotateY( -Math.PI/2 );
+
+		rotations++;
+		rotations%=4;
+	},
+
+	rotateLeft: function ( boat )
+	{
+		boat.rotateY( Math.PI/2 );
+
+		if( !rotations )
+			rotations = 4;
+
+		rotations--;
+	},
+
+	actualPosition: function ( boat )
+	{
+		switch( rotations )
+		{
+			case 1: rotateRight( boat ) break;
+			case 2: rotateRight( boat ) rotateRight( boat ) break;
+			case 3: rotateLeft( boat ) break;
+		}
 	}
 };

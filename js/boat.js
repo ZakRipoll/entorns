@@ -1,40 +1,92 @@
-function Boat( x, z, size, direction, name )
+function Boat( x, z, size, name, object )
 {
 	this.x = x;
 	this.z = z;
 	this.size = size;
 	this.life = size;
-	this.direction = direction;
 	this.name = name;
+	this.object = object;
+	this.direction = 0;
 };
 
-Boat.prototype.GetEsential = function()
+/* ******************************************* ESENTIAL TO POSITIONATE THE BOAT ******************************************* */
+Boat.prototype.getEsential = function()
 {
 	return { x: this.x, z: this.z, size: this.size, direction: this.direction };
 };
 
-Boat.prototype.SetDamage = function()
+/* ****************************************************** CHECK LIFE ****************************************************** */
+Boat.prototype.isDead = function()
 {
-	this.size -= 1;
+	return this.life == 0;
 };
 
-Boat.prototype.GetPositionFront = function()
+/* ************************************************ SET DAMAGE TO THE BOAT ************************************************ */
+Boat.prototype.setDamage = function()
+{
+	if( !this.isDead )
+
+		this.life -= 1;
+};
+
+/* ******************************************************** ROTATE ******************************************************** */
+Boat.prototype.getPositionFront = function()
 {
 	var x = this.x, z = this.z
 
-	if ( this.direction = "dreta" )
-		
-		x = x + ( this.size - 1 ) * 50;
-	
-	else if ( this.direction = "amunt" )
-		
-		z = z + ( this.size - 1 ) * 50;
+	switch ( this.direction )
+	{
+		case 0:
+
+			z = z + ( this.size - 1 ) * 50;
+
+		break;
+
+		case 1:
+
+			z = z + ( this.size - 1 ) * 50;
+
+		break;
+
+		case 2:
+
+			z = z + ( this.size - 1 ) * 50;
+
+		break;
+
+		case 3:
+
+			x = x + ( this.size - 1 ) * 50;
+
+		break;
+	}
 
 	return { x: x, y: y }
-}
+};
 
-Boat.prototype.GetInformation = function()
+/* ******************************************************* ROTATIONS ******************************************************* */
+Boat.prototype.rotateRight = function()
 {
-	return "Coordinates, x: " + this.x + " z: " + this.z + ". \nSize of the boat: " + this.size 
+	this.object.rotateY( -Math.PI/2 )
+
+	this.direction++;
+	this.direction%=4;
+};
+
+Boat.prototype.rotateLeft = function()
+{
+	this.object.rotateY( Math.PI/2 )
+
+	if( !this.direction )
+
+		this.direction = 4;
+
+	this.direction--;
+};
+
+/* ************************************************** GENERAL INFORMATION ************************************************** */
+Boat.prototype.getInformation = function()
+{
+	return "Coordinates, x: " + this.x + " z: " + this.z + ". \nSize of the boat: " + this.size
 			+ ". \nLife of the boat: " + this.life + ". \nDirection of the boat: " + this.direction;
 };
