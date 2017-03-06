@@ -24,6 +24,7 @@ container.addEventListener('mousedown', function(e)
 {
 	if( !dintreTauler() )
 		return;
+		
 	switch( e.button )
 	{
 		case 0:

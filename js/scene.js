@@ -27,7 +27,9 @@ function init()
 
 	scene.add( factory.createLight( 0, 100 * dimensio, 0, 0xffffff ) );
 
-	scene.add( factory.createSkybox( ) );
+	//scene.add( factory.createSkybox( ) );
+
+	scene.add( factory.createMar( SCREEN_HEIGHT ) );
 
 	scene.add( factory.createPlane( dimensio ) );
 

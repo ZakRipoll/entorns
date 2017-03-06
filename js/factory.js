@@ -54,6 +54,20 @@ var factory =
 		return basePlane;
 	},
 
+	createMar: function( size )
+	{
+		size *= 10;
+
+		var mar = new THREE.Mesh( new THREE.PlaneGeometry( size, size ),
+		new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'imatges/Calm-ocean.jpg' ) } ) );
+
+		mar.rotation.x = -Math.PI / 2;
+
+		mar.position.y = -deep
+
+		return mar;
+	},
+
 /* ********************************************************* SKYBOX ********************************************************* */
 	createSkybox: function()
 	{
@@ -78,5 +92,11 @@ var factory =
 			container.add( object );
 		})
 		return container;
+	},
+
+	loadBoat: function()
+	{
+
 	}
+
 };

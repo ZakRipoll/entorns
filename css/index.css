@@ -4,8 +4,28 @@ body
   overflow: hidden;
 }
 
+#Comands
+{
+  float: left;
+  width: 20%;
+  height: 100vh;
+  background-image: url("../imatges/plateMetal.jpg");
+  background-size: 100% 100%;
+  background-position: center;
+}
+
+#Chat
+{
+  width: 20%;
+  height: 100vh;
+  float: right;
+  background-color: black;
+}
+
 #ThreeJS
 {
-	width: 100vw; 
-	height: 100vh;
+  margin: auto;
+  width: 60%;
+  height: 100vh;
+  cursor: url('../imatges/cursors/anchor.png'), default;
 }
