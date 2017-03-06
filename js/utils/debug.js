@@ -30,17 +30,18 @@ var debug =
 	},
 
 	/* ******************************************************* ROTATIONS ******************************************************* */
-	rotateRight: function ( boat )
+
+	giraDreta: function ()
 	{
-		boat.rotateY( -Math.PI/2 );
+		actual.rotateY( -Math.PI/2 );
 
 		rotations++;
 		rotations%=4;
 	},
 
-	rotateLeft: function ( boat )
+	gireEsquerra: function ()
 	{
-		boat.rotateY( Math.PI/2 );
+		actual.rotateY( Math.PI/2 );
 
 		if( !rotations )
 			rotations = 4;
@@ -48,13 +49,23 @@ var debug =
 		rotations--;
 	},
 
+	rotateRight: function ( boat )
+	{
+		boat.rotateY( -Math.PI/2 );
+	},
+
+	rotateLeft: function ( boat )
+	{
+		boat.rotateY( Math.PI/2 );
+	},
+
 	actualPosition: function ( boat )
 	{
 		switch( rotations )
 		{
-			case 1: rotateRight( boat ) break;
-			case 2: rotateRight( boat ) rotateRight( boat ) break;
-			case 3: rotateLeft( boat ) break;
-		}
+			case 1: this.rotateRight( boat ); break;
+			case 2: this.rotateRight( boat ); this.rotateRight( boat ); break;
+			case 3: this.rotateLeft( boat ); break;
+		};
 	}
 };
