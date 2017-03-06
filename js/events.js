@@ -46,6 +46,10 @@ container.addEventListener('mousedown', function(e)
 	};
 }, false);
 
+container.oncontextmenu = function () {
+   return false;
+}
+
 container.addEventListener("mouseout", function(e)
 {
 
