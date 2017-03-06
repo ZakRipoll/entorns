@@ -2,9 +2,12 @@ var message =
 {
   shoot: function( x, z )
   {
-    x = ( x.toLowerCase().charCodeAt(0) - 97 ) * 100 - 450;
-    z = --z * 100 - 450;
-    console.log( x + ", " + z);
-    scene.add( debug.createCubeRay( x, 50, z, 1, 4 ) );
+    if ( isNaN( x ) )
+    {
+      x = ( x.toLowerCase().charCodeAt(0) - 97 ) * 100 - 450;
+      z = --z * 100 - 450;
+    }
+
+    scene.add( debug.createCubeRay( z, 50, x, 1, 4 ) );
   }
 }

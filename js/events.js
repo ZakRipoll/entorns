@@ -24,12 +24,26 @@ container.addEventListener('mousedown', function(e)
 {
 	if( !dintreTauler() )
 		return;
+	switch( e.button )
+	{
+		case 0:
 
-	var boat = factory.createBoat( 'imatges/boat.obj', "Boat" );
-	boat.position.set( pos.x, 50, pos.z );
-	debug.actualPosition( boat );
-	scene.add( boat );
+			var boat = factory.createBoat( 'imatges/boat.obj', "Boat" );
 
+			boat.position.set( pos.x, 50, pos.z );
+
+			debug.actualPosition( boat );
+
+			scene.add( boat );
+
+		break;
+
+		case 1:
+
+		break;
+
+		case 2: message.shoot( pos.z, pos.x ); 	break;
+	};
 }, false);
 
 container.addEventListener("mouseout", function(e)
