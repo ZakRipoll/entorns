@@ -21,4 +21,10 @@ var direction =
 	left: 3
 };
 
+var messageStruck =
+{
+	chat: document.getElementById("ChatContainer"),
+	input: document.getElementById("InputContainer")
+};
+
 var deep = 10;

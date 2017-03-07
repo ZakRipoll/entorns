@@ -1,31 +1,83 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 body
 {
   margin: 0;
   overflow: hidden;
 }
 
-#Comands
+#Commands
 {
-  float: left;
-  width: 20%;
+  position: fixed;
+  left: 0;
+  width: 20vw;
   height: 100vh;
   background-image: url("../imatges/plateMetal.jpg");
   background-size: 100% 100%;
   background-position: center;
 }
 
-#Chat
+#ChatContainer
+{
+  position: fixed;
+  right: 0;
+  width: 20vw;
+  height: 100vh;
+  background-color: black;
+}
+
+#InputContainer
+{
+  width: 20vw;
+  height: 5vh;
+  position: absolute;
+  bottom: 0;
+}
+
+#InputContainer input
+{
+  width: 100%;
+  height: 100%;
+  line-height: 5vh;
+  font-family: 'Roboto', sans-serif;;
+}
+
+#MessageContainer
+{
+  width: 100%;
+  height: 10%;
+}
+
+#Message
+{
+  width: 80%;
+  float: left;
+  display: flex;
+}
+
+#ImageContainer
 {
   width: 20%;
-  height: 100vh;
+  height: auto;
   float: right;
-  background-color: black;
+}
+
+#Image
+{
+  width: 100%;
+  height: auto;
+}
+
+#Text
+{
+  color: white;
+  align-self: flex-end;
 }
 
 #ThreeJS
 {
   margin: auto;
-  width: 60%;
+  width: 60vw;
   height: 100vh;
   cursor: url('../imatges/cursors/anchor.png'), default;
 }
