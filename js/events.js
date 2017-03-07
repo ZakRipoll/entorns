@@ -9,8 +9,6 @@ container.addEventListener('mousemove', function(e)
 	actual.position.y = dimensio * 5;
 	actual.position.z = onTauler( pos.z );
 
-	console.log( pos.x + ", " + pos.z );
-
 }, false);
 
 container.addEventListener('mousedown', function(e)
@@ -38,7 +36,7 @@ container.addEventListener('mousedown', function(e)
 
 		case 2:
 
-			shoot.oneShoot( pos.z, pos.x );
+			directShoot(  [ shoot.worldToBoard( pos.z ) - 1, shoot.worldToBoard( pos.x ) ] );
 
 		break;
 	};

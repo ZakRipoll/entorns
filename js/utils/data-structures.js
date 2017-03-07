@@ -23,8 +23,9 @@ var direction =
 
 var messageStruck =
 {
+	messages: document.getElementById("MessagesContainers"),
 	chat: document.getElementById("ChatContainer"),
-	input: document.getElementById("InputContainer")
+	input: document.getElementById("Input")
 };
 
 var deep = 10;
