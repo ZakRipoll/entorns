@@ -36,7 +36,7 @@ container.addEventListener('mousedown', function(e)
 
 		case 2:
 
-			directShoot(  [ shoot.worldToBoard( pos.z ) - 1, shoot.worldToBoard( pos.x ) ] );
+			directShoot( [ pos.z, pos.x ] );
 
 		break;
 	};
