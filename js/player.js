@@ -6,8 +6,10 @@ function Player( name, avatar )
   this.boats = [];
   this.board = [];
 
+  this.maxBoats = 7;
+
   this.actualBoat = -1;
-  this.actual = this.actualBoat;
+  this.actual = null;
 
   this.loadBoard();
   this.loadBoats();
@@ -16,8 +18,6 @@ function Player( name, avatar )
 
 Player.prototype.loadBoats = function()
 {
-  for( var  i = 0; i < 7; ++i )
-
     this.boats.push( factory.createBoat( 'imatges/boat.obj', "Boat" ) );
 };
 
@@ -25,7 +25,7 @@ Player.prototype.incrementActualBoat = function()
 {
     this.actualBoat++;
 
-    this.actualBoat %= this.boats.length;
+    this.actualBoat %= this.maxBoats;
 
     this.actual = this.boats[ this.actualBoat ];
 };
@@ -35,10 +35,6 @@ Player.prototype.loadBoard = function()
   for( var i = 0; i < 10; ++i )
   {
     this.board[ i ] = [];
-
-    for( var j = 0; j < 10; ++j )
-
-      this.board[ i ][ j ] = '';
   }
 };
 

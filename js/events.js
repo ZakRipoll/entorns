@@ -20,9 +20,14 @@ container.addEventListener('mousedown', function(e)
 	{
 		case 0:
 
+			scene.add( player.actual );
+
+			player.loadBoats();
+
 			player.incrementActualBoat();
 
 			player.boardPosition( shoot.worldToBoard( pos.x, pos.z ) );
+
 
 		break;
 

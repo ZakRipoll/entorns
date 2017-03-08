@@ -4,7 +4,7 @@ var animate  = {
 	{
 		for (var i = 0; i < geometry.vertices.length; i++)
 
-			geometry.vertices[i].z = Math.sin( i + delta * .05 ) * deep;
+			geometry.vertices[i].z = Math.sin( i + delta * .02 ) * deep;
 
 		geometry.computeFaceNormals();
 		geometry.computeVertexNormals();

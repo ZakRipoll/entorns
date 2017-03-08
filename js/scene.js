@@ -1,5 +1,5 @@
 /* ************************************** google-chrome --allow-file-access-from-files ************************************** */
-var container, scene, camera, renderer, geometry, actual,textureLoader;
+var container, scene, camera, renderer, geometry, textureLoader;
 var dimensio = 10, c = 0, amplada = 5, rotations = 0
 var player, adversarial
 
@@ -10,6 +10,10 @@ function init()
 	textureLoader = new THREE.TextureLoader();
 
 	player = new Player( "iZac", avatar.brook );
+
+	player.loadBoats();
+
+	player.incrementActualBoat();
 
 	printMsg( "Hello, " + player.name, 1 );
 
@@ -23,7 +27,7 @@ function init()
 
 	var SCREEN_HEIGHT = container.clientHeight;
 
-	camera = factory.createCamera( 45, SCREEN_WIDTH / SCREEN_HEIGHT, .1, 5000);
+	camera = factory.createCamera( 45, SCREEN_WIDTH / SCREEN_HEIGHT, 1000, 3000);
 
 	camera.position.set( 0, 150 * dimensio, 0 );
 
@@ -48,7 +52,7 @@ function init()
 
 	geometry = scene.getObjectByName( "mar" ).geometry;
 
-	scene.getObjectByName( "mar" ).position.y -= deep*2;	
+	scene.getObjectByName( "mar" ).position.y -= deep*2;
 
 	camera.lookAt( scene.getObjectByName( "tauler" ).position );
 };

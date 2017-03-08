@@ -53,6 +53,7 @@ body
   width: 100%;
   overflow: auto;
   display: none;
+  border-bottom: 1px dashed gray;
 }
 
 #Message

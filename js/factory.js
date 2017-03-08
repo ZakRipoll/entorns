@@ -44,6 +44,7 @@ var factory =
 		var geometry = new THREE.PlaneGeometry( size, size, dimensio, dimensio );
 
 		if( name == "tauler" )
+
 			var material = new THREE.MeshPhongMaterial( {color: 0xffffff, wireframe: true } );
 
 		else
@@ -52,42 +53,32 @@ var factory =
 
 		var basePlane = new THREE.Mesh( geometry, material );
 
-		basePlane.rotation.x = -Math.PI / 2;
+		basePlane.rotation.x = -Math.PI*.5;
 
 		basePlane.name = name;
 
 		return basePlane;
 	},
 
-	createMar: function( size )
-	{
-		size *= 10;
-
-		var mar = new THREE.Mesh( new THREE.PlaneGeometry( size, size ),
-
-		new THREE.MeshBasicMaterial( { map: textureLoader.load( 'imatges/Calm-ocean.jpg' ) } ) );
-
-		mar.rotation.x = -Math.PI / 2;
-
-		mar.position.y = -deep
-
-		return mar;
-	},
-
 /* ***************************************************** CREATE BOAT ***************************************************** */
 	createBoat: function( url, name )
 	{
-		var loader = new THREE.OBJLoader();
-		var container = new THREE.Object3D();
+		var manager = new THREE.LoadingManager();
+		var loader = new THREE.OBJLoader(manager);
+		//var container = new THREE.Object3D();
+		//container.name = name;
 
-		container.name = name;
-
-		loader.load( url, function ( object )
-		{
-			object.name = name;
-			container.add( object );
-		})
-		return container;
+		loader.load( url, function ( object ){
+			object.traverse(function(child){
+				if(child instanceof THREE.Mesh){
+					console.log("Carrego Mesh");
+				}
+				child.name = name;
+			});
+			//object.scale.set(5,5);
+			//container.add( object );
+			console.log( object );
+			return object
+		});
 	}
-
 };
