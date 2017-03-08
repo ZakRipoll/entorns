@@ -37,19 +37,24 @@ var factory =
 	},
 
 /* ********************************************************* PLANE ********************************************************* */
-	createPlane: function( dimensio )
+	createPlane: function( dimensio, name )
 	{
 		var size = dimensio * 100;
 
-		geometry = new THREE.PlaneGeometry( size, size, dimensio, dimensio );
+		var geometry = new THREE.PlaneGeometry( size, size, dimensio, dimensio );
 
-		material = new THREE.MeshPhongMaterial( {color: 0xffffff, wireframe: true } );
+		if( name == "tauler" )
+			var material = new THREE.MeshPhongMaterial( {color: 0xffffff, wireframe: true } );
 
-		basePlane = new THREE.Mesh( geometry, material );
+		else
+
+			material = new THREE.MeshPhongMaterial( {map:textureLoader.load( 'imatges/Calm-ocean.jpg'), wireframe: false } );
+
+		var basePlane = new THREE.Mesh( geometry, material );
 
 		basePlane.rotation.x = -Math.PI / 2;
 
-		basePlane.name = "tauler";
+		basePlane.name = name;
 
 		return basePlane;
 	},
@@ -59,7 +64,8 @@ var factory =
 		size *= 10;
 
 		var mar = new THREE.Mesh( new THREE.PlaneGeometry( size, size ),
-		new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'imatges/Calm-ocean.jpg' ) } ) );
+
+		new THREE.MeshBasicMaterial( { map: textureLoader.load( 'imatges/Calm-ocean.jpg' ) } ) );
 
 		mar.rotation.x = -Math.PI / 2;
 

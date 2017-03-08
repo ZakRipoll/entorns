@@ -21,7 +21,7 @@ container.addEventListener('mousedown', function(e)
 		case 0:
 
 			player.incrementActualBoat();
-			
+
 			player.boardPosition( shoot.worldToBoard( pos.x, pos.z ) );
 
 		break;
@@ -56,14 +56,6 @@ function raycasting( x, y )
 	if ( intersects.length == 0 )
 
 		return;
-
-	console.log( intersects )
-
-	if( intersects.length == 3)
-	{
-		comprovacio = intersects;
-		console.log( "S'ha de mirar de com posar el nom" );
-	}
 
 	return { x: intersects[ 0 ].point.x, z: intersects[ 0 ].point.z }
 };

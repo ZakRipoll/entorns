@@ -1,4 +1,4 @@
-var deep = 10;
+var deep = 5;
 
 var view =
 {

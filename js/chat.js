@@ -63,6 +63,8 @@ function printMsg( message, user )
 
 	newMessage.querySelector("#Image").src = ( user ) ? player.avatar : adversarial.avatar;
 
+	newMessage.style.display = "block";
+
 	messageStruck.messages.appendChild( newMessage );
 
 	messageStruck.input.value = "";

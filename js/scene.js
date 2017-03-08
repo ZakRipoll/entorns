@@ -1,5 +1,5 @@
 /* ************************************** google-chrome --allow-file-access-from-files ************************************** */
-var container, scene, camera, renderer, geometry, material, actual, basePlane;
+var container, scene, camera, renderer, geometry, actual,textureLoader;
 var dimensio = 10, c = 0, amplada = 5, rotations = 0
 var player, adversarial
 
@@ -7,8 +7,15 @@ function init()
 {
 	scene = new THREE.Scene();
 
+	textureLoader = new THREE.TextureLoader();
+
 	player = new Player( "iZac", avatar.brook );
+
+	printMsg( "Hello, " + player.name, 1 );
+
 	adversarial = new Player( "Aurel", avatar.rufy );
+
+	printMsg( "Hello, " + adversarial.name, 0 );
 
 	container = document.getElementById( "ThreeJS" );
 
@@ -31,13 +38,17 @@ function init()
 
 	scene.add( factory.createLight( 0, 100 * dimensio, 0, 0xffffff ) );
 
-	scene.add( factory.createMar( SCREEN_HEIGHT ) );
+	scene.add( factory.createPlane( 13, "mar") );
 
-	scene.add( factory.createPlane( dimensio ) );
+	scene.add( factory.createPlane( dimensio, "tauler" ) );
 
 	scene.add( factory.createAxis( ) );
 
 	scene.add( player.actual );
+
+	geometry = scene.getObjectByName( "mar" ).geometry;
+
+	scene.getObjectByName( "mar" ).position.y -= deep*2;	
 
 	camera.lookAt( scene.getObjectByName( "tauler" ).position );
 };

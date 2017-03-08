@@ -11,7 +11,7 @@ function Player( name, avatar )
 
   this.loadBoard();
   this.loadBoats();
-  this.incrementActualBoat()
+  this.incrementActualBoat();
 };
 
 Player.prototype.loadBoats = function()
