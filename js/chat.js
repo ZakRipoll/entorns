@@ -41,7 +41,7 @@ function onCommand( tiro )
 
 function checkMessage( tiro )
 {
-		printMsg( "It's a " + ( player.detectShoot( tiro ) ? "hit" : "miss" ), 0);
+		printMsg( "It's a " + ( player.detectShoot( tiro ) ? "hit" : "miss" ), 0 );
 };
 
 function sendMsg( message )
@@ -57,9 +57,11 @@ function printMsg( message, user )
 
 	newMessage.querySelector("#Text").innerText = message;
 
-	newMessage.querySelector("#ImageContainer").style.clear;
+	if( !user )
 
-	newMessage.querySelector("#Image").src = player.avatar;
+		newMessage.querySelector("#ImageContainer").style.float = "left";
+
+	newMessage.querySelector("#Image").src = ( user ) ? player.avatar : adversarial.avatar;
 
 	messageStruck.messages.appendChild( newMessage );
 

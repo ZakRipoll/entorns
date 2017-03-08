@@ -1,13 +1,14 @@
 /* ************************************** google-chrome --allow-file-access-from-files ************************************** */
 var container, scene, camera, renderer, geometry, material, actual, basePlane;
 var dimensio = 10, c = 0, amplada = 5, rotations = 0
-var player
+var player, adversarial
 
 function init()
 {
 	scene = new THREE.Scene();
 
 	player = new Player( "iZac", avatar.brook );
+	adversarial = new Player( "Aurel", avatar.rufy );
 
 	container = document.getElementById( "ThreeJS" );
 
