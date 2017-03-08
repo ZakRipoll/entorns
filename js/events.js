@@ -5,9 +5,9 @@ container.addEventListener('mousemove', function(e)
 {
 	pos = positionate( raycasting( e.offsetX, e.offsetY ) );
 
-	actual.position.x = onTauler( pos.x );
-	actual.position.y = dimensio * 5;
-	actual.position.z = onTauler( pos.z );
+	player.actual.position.x = onTauler( pos.x );
+	player.actual.position.y = dimensio * 5;
+	player.actual.position.z = onTauler( pos.z );
 
 }, false);
 
@@ -20,13 +20,9 @@ container.addEventListener('mousedown', function(e)
 	{
 		case 0:
 
-			var boat = factory.createBoat( 'imatges/boat.obj', "Boat" );
-
-			boat.position.set( pos.x, 50, pos.z );
-
-			debug.actualPosition( boat );
-
-			scene.add( boat );
+			player.incrementActualBoat();
+			
+			player.boardPosition( shoot.worldToBoard( pos.x, pos.z ) );
 
 		break;
 

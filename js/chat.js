@@ -2,22 +2,22 @@ messageStruck.chat.addEventListener("keyup", function(event)
 {
 	event.preventDefault();
 
-	if( event.keyCode == 13 && messageStruck.input.value.length )
-	{
-		var tiro = messageStruck.input.value;
+	if( event.keyCode != 13 || !messageStruck.input.value.length )
+		return;
 
-		if( tiro.length == 2 )
+	var tiro = messageStruck.input.value;
 
-			possibleShoot( shoot.gameToWorld( tiro[0],  tiro[1] )  );
+	if( tiro.length == 2 && shoot.isShoot( shoot.gameToWorld( tiro[ 0 ], tiro[ 1 ] ) ) )
 
-		else if( tiro.length == 3 && tiro[1] == 1 && tiro[2] == 0 )
+		possibleShoot( shoot.gameToWorld( tiro[ 0 ],  tiro[ 1 ] ) );
 
-			possibleShoot( shoot.gameToWorld( tiro[0],  10 ) );
+	else if( tiro.length == 3 && tiro[ 1 ] == 1 && tiro[ 2 ] == 0 )
 
-		else
+		possibleShoot( shoot.gameToWorld( tiro[ 0 ],  10 ) );
 
-			sendMsg( tiro, 1 );
-	}
+	else
+
+		sendMsg( tiro, 1 );
 });
 
 function possibleShoot( tiro )
@@ -25,7 +25,6 @@ function possibleShoot( tiro )
 	if( shoot.isShoot( tiro[ 0 ], tiro[ 1 ] ) )
 
 		onCommand( tiro );
-
 };
 
 function directShoot( tiro )
@@ -33,15 +32,16 @@ function directShoot( tiro )
 	onCommand( tiro );
 };
 
-function chekMessage( message, user )
-{
-
-};
-
 function onCommand( tiro )
 {
 	shoot.oneShoot( tiro[0], tiro[1] );
 	sendMsg( shoot.printShoot( tiro[0], tiro[1] ), 1 );
+	checkMessage( tiro );
+};
+
+function checkMessage( tiro )
+{
+		printMsg( "It's a " + ( player.detectShoot( tiro ) ? "hit" : "miss" ), 0);
 };
 
 function sendMsg( message )
@@ -54,8 +54,16 @@ function sendMsg( message )
 function printMsg( message, user )
 {
 	var newMessage = document.getElementById("MessageContainer").cloneNode(true);
+
 	newMessage.querySelector("#Text").innerText = message;
+
+	newMessage.querySelector("#ImageContainer").style.clear;
+
+	newMessage.querySelector("#Image").src = player.avatar;
+
 	messageStruck.messages.appendChild( newMessage );
+
 	messageStruck.input.value = "";
+
 	messageStruck.messages.scrollTop = messageStruck.messages.scrollHeight;
 };

@@ -2,6 +2,11 @@ var shoot =
 {
   isShoot: function( x, z )
   {
+    if( x.length == 2 )
+    {
+      z = x[1];
+      x = x[0];
+    }
     return -450 <= x && x <= 450 && -450 <= z && z <= 450;
   },
 

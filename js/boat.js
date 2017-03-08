@@ -1,11 +1,11 @@
-function Boat( x, z, size, name, object )
+function Boat( x, z, size, name, url )
 {
 	this.x = x;
 	this.z = z;
 	this.size = size;
 	this.life = size;
 	this.name = name;
-	this.object = object;
+	this.object = factory.createBoat( url, name );
 	this.direction = 0;
 };
 
@@ -26,7 +26,7 @@ Boat.prototype.setDamage = function()
 {
 	if( !this.isDead )
 
-		this.life -= 1;
+		this.life--;
 };
 
 /* ******************************************************** ROTATE ******************************************************** */
@@ -65,24 +65,44 @@ Boat.prototype.getPositionFront = function()
 };
 
 /* ******************************************************* ROTATIONS ******************************************************* */
-Boat.prototype.rotateRight = function()
+
+Boat.prototype.giraDreta = function ()
 {
-	this.object.rotateY( -Math.PI/2 )
+	this.object.rotateY( -Math.PI/2 );
 
-	this.direction++;
-	this.direction%=4;
-};
+	rotations++;
+	rotations%=4;
+},
 
-Boat.prototype.rotateLeft = function()
+Boat.prototype.gireEsquerra = function ()
 {
-	this.object.rotateY( Math.PI/2 )
+	this.object.rotateY( Math.PI/2 );
 
-	if( !this.direction )
+	if( !rotations )
+		rotations = 4;
 
-		this.direction = 4;
+	rotations--;
+},
 
-	this.direction--;
-};
+Boat.prototype.rotateRight = function ( boat )
+{
+	this.object.rotateY( -Math.PI*.5 );
+},
+
+Boat.prototype.rotateLeft = function ( boat )
+{
+	this.object.rotateY( Math.PI*.5 );
+},
+
+Boat.prototype.actualPosition = function ( boat )
+{
+	switch( rotations )
+	{
+		case 1: this.rotateRight( boat ); break;
+		case 2: this.rotateRight( boat ); this.rotateRight( boat ); break;
+		case 3: this.rotateLeft( boat ); break;
+	};
+}
 
 /* ************************************************** GENERAL INFORMATION ************************************************** */
 Boat.prototype.getInformation = function()

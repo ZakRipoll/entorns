@@ -1,3 +1,5 @@
+var deep = 10;
+
 var view =
 {
 	ground: 1,
@@ -28,4 +30,15 @@ var messageStruck =
 	input: document.getElementById("Input")
 };
 
-var deep = 10;
+var avatar =
+{
+	brook: "imatges/Avatars/Brook.png",
+	chopper: "imatges/Avatars/Chopper.png",
+	franky: "imatges/Avatars/Franky.png",
+	nami: "imatges/Avatars/Nami.png",
+	robin: "imatges/Avatars/Robin.png",
+	rufy: "imatges/Avatars/Rufy.png",
+	sanji: "imatges/Avatars/Sanji.png",
+	usopp: "imatges/Avatars/Usopp.png",
+	zoro: "imatges/Avatars/Zoro.png"
+};

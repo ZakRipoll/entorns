@@ -1,10 +1,13 @@
 /* ************************************** google-chrome --allow-file-access-from-files ************************************** */
 var container, scene, camera, renderer, geometry, material, actual, basePlane;
 var dimensio = 10, c = 0, amplada = 5, rotations = 0
+var player
 
 function init()
 {
 	scene = new THREE.Scene();
+
+	player = new Player( "iZac", avatar.brook );
 
 	container = document.getElementById( "ThreeJS" );
 
@@ -27,17 +30,13 @@ function init()
 
 	scene.add( factory.createLight( 0, 100 * dimensio, 0, 0xffffff ) );
 
-	//scene.add( factory.createSkybox( ) );
-
 	scene.add( factory.createMar( SCREEN_HEIGHT ) );
 
 	scene.add( factory.createPlane( dimensio ) );
 
 	scene.add( factory.createAxis( ) );
 
-	actual = factory.createBoat( 'imatges/boat.obj', "Boat" );
-
-	scene.add( actual );
+	scene.add( player.actual );
 
 	camera.lookAt( scene.getObjectByName( "tauler" ).position );
 };

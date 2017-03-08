@@ -68,16 +68,6 @@ var factory =
 		return mar;
 	},
 
-/* ********************************************************* SKYBOX ********************************************************* */
-	createSkybox: function()
-	{
-		var skyBoxMaterial = new THREE.MeshBasicMaterial( { color: seaColors.original, side: THREE.BackSide } );
-
-		var skyBoxGeometry = new THREE.CubeGeometry( 2000, 2000, 2000 );
-
-		return new THREE.Mesh( skyBoxGeometry, skyBoxMaterial );
-	},
-
 /* ***************************************************** CREATE BOAT ***************************************************** */
 	createBoat: function( url, name )
 	{
@@ -92,11 +82,6 @@ var factory =
 			container.add( object );
 		})
 		return container;
-	},
-
-	loadBoat: function()
-	{
-
 	}
 
 };
