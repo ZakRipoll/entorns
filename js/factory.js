@@ -10,7 +10,7 @@ var factory =
 /* ********************************************************* LIGHT ********************************************************* */
 	createLight: function( x, y, z, color, name )
 	{
-		var light = new THREE.PointLight( color || 0xff0000 );
+		var light = new THREE.PointLight( color || 0x000000 );
 		light.position.set( x, y, z );
 		light.name = name || "light";
 		return light;
@@ -43,9 +43,11 @@ var factory =
 
 		var geometry = new THREE.PlaneGeometry( size, size, dimensio, dimensio );
 
+		var material
+
 		if( name == "tauler" )
 
-			var material = new THREE.MeshPhongMaterial( {color: 0xffffff, wireframe: true } );
+			material = new THREE.MeshPhongMaterial( {color: 0xffffff, wireframe: true } );
 
 		else
 
@@ -61,24 +63,31 @@ var factory =
 	},
 
 /* ***************************************************** CREATE BOAT ***************************************************** */
-	createBoat: function( url, name )
+	createBoat: function( url, name, that )
 	{
 		var manager = new THREE.LoadingManager();
-		var loader = new THREE.OBJLoader(manager);
-		//var container = new THREE.Object3D();
-		//container.name = name;
+		var loader = new THREE.OBJLoader( manager );
 
-		loader.load( url, function ( object ){
-			object.traverse(function(child){
-				if(child instanceof THREE.Mesh){
+		loader.load( url, function ( object )
+		{
+			object.traverse(function( child )
+			{
+				if(child instanceof THREE.Mesh)
+				{
 					console.log("Carrego Mesh");
 				}
-				child.name = name;
+				object.name = name;
 			});
-			//object.scale.set(5,5);
-			//container.add( object );
-			console.log( object );
-			return object
+
+			that.lenght = new THREE.Box3().setFromObject( object ).size();
+
+			that.positionate = that.lenght*.25;
+
+			that.actual = object;
+
+			that.rotation = 0;
+
+			scene.add( that.actual );
 		});
 	}
 };

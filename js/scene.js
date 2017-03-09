@@ -11,10 +11,6 @@ function init()
 
 	player = new Player( "iZac", avatar.brook );
 
-	player.loadBoats();
-
-	player.incrementActualBoat();
-
 	printMsg( "Hello, " + player.name, 1 );
 
 	adversarial = new Player( "Aurel", avatar.rufy );
@@ -29,7 +25,7 @@ function init()
 
 	camera = factory.createCamera( 45, SCREEN_WIDTH / SCREEN_HEIGHT, 1000, 3000);
 
-	camera.position.set( 0, 150 * dimensio, 0 );
+	camera.position.set( 0, SCREEN_HEIGHT * 2, 0 );
 
 	scene.add( camera );
 
@@ -40,9 +36,9 @@ function init()
 	THREEx.WindowResize(renderer, camera);
 	THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) });
 
-	scene.add( factory.createLight( 0, 100 * dimensio, 0, 0xffffff ) );
+	scene.add( factory.createLight( -1000, 200 * dimensio, 0, 0xffebcc ) );
 
-	scene.add( factory.createPlane( 13, "mar") );
+	scene.add( factory.createPlane( 20, "mar") );
 
 	scene.add( factory.createPlane( dimensio, "tauler" ) );
 
@@ -52,7 +48,7 @@ function init()
 
 	geometry = scene.getObjectByName( "mar" ).geometry;
 
-	scene.getObjectByName( "mar" ).position.y -= deep*2;
+	scene.getObjectByName( "mar" ).position.y -= deep * 2;
 
 	camera.lookAt( scene.getObjectByName( "tauler" ).position );
 };

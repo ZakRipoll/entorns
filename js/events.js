@@ -1,24 +1,67 @@
-var lastMousePosition = new THREE.Vector2( 0, 0 ), pos, c = 0, comprovacio;
+var pos, c = 0;
 
 /* ****************************************************** MOUSEMOVE ****************************************************** */
 container.addEventListener('mousemove', function(e)
 {
 	pos = positionate( raycasting( e.offsetX, e.offsetY ) );
 
-	player.actual.position.x = onTauler( pos.x );
-	player.actual.position.y = dimensio * 5;
-	player.actual.position.z = onTauler( pos.z );
+	var cell = shoot.worldToBoard( pos.x, pos.z )
 
+	console.log( cell );
+
+	if( player.rotation == 0 )
+	{
+		if( cell[0] > 1 )
+		{
+			player.actual.position.x = onTauler( pos.x ) - player.lenght.x * .25;
+		}
+	}
+	else if( player.rotation == 2 )
+	{
+		if( cell[0] < 8 )
+		{
+			player.actual.position.x = onTauler( pos.x ) + player.lenght.x * .25;
+		}
+	}
+	else
+	{
+		player.actual.position.x = onTauler( pos.x );
+	}
+
+	player.actual.position.y = dimensio * 5;
+
+	if( player.rotation == 1 )
+	{
+		if( cell[1] > 1 )
+		{
+			player.actual.position.z = onTauler( pos.z ) - player.lenght.x * .25;
+		}
+	}
+	else if( player.rotation == 3 )
+	{
+		if( cell[1] < 8 )
+		{
+			player.actual.position.z = onTauler( pos.z ) + player.lenght.x * .25;
+		}
+	}
+	else
+	{
+		player.actual.position.z = onTauler( pos.z );
+	}
 }, false);
 
 container.addEventListener('mousedown', function(e)
 {
 	if( !dintreTauler() )
-		return;
+	return;
 
 	switch( e.button )
 	{
 		case 0:
+
+			if( player.maximumBoats() )
+
+				break;
 
 			scene.add( player.actual );
 
@@ -28,23 +71,26 @@ container.addEventListener('mousedown', function(e)
 
 			player.boardPosition( shoot.worldToBoard( pos.x, pos.z ) );
 
-
 		break;
 
 		case 1:
+
+		player.actual.rotation.y += -Math.PI * .5;
+
+		player.newRotation();
 
 		break;
 
 		case 2:
 
-			directShoot( [ pos.z, pos.x ] );
+		directShoot( [ pos.z, pos.x ] );
 
 		break;
 	};
 }, false);
 
 container.oncontextmenu = function () {
-   return false;
+	return false;
 }
 
 /* ***************************************************** RAY TRAICING **************************************************** */
@@ -52,7 +98,7 @@ function raycasting( x, y )
 {
 	var raycaster = new THREE.Raycaster();
 	var screenMouse = new THREE.Vector2( ( x / container.childNodes[0].width ) * 2 - 1,
-										-( y / container.childNodes[0].height ) * 2 + 1 );
+	-( y / container.childNodes[0].height ) * 2 + 1 );
 
 	raycaster.setFromCamera( screenMouse, camera );
 
@@ -60,35 +106,9 @@ function raycasting( x, y )
 
 	if ( intersects.length == 0 )
 
-		return;
+	return;
 
 	return { x: intersects[ 0 ].point.x, z: intersects[ 0 ].point.z }
-};
-
-function intesectionInfinitePlane( x, y )
-{
-	var vector = new THREE.Vector3( x, y, .5);
-	var normal = new THREE.Vector3( 0, 1, 0 );
-
-	vector = vector.unproject( camera );
-
-	var ray = vector.sub( camera.position ).normalize();
-
-	var demonimador = ray.dot( normal );
-
-	var distance;
-
-	if( demonimador )
-
-		distance = ( - camera.position.dot( normal ) ) / demonimador;
-
-	else return;
-
-	var copy = new THREE.Vector3( ray.x, ray.y, ray.z );
-
-	var intersects = copy.multiplyScalar( distance ).add( camera.position );
-
-	return positionate( { x: intersects.x, z:intersects.z } )
 };
 
 /* *********************************************** POSITIONATE IN THE BOARD *********************************************** */
@@ -96,11 +116,11 @@ function onTauler( coord )
 {
 	if( coord > 500 )
 
-		coord = 450;
+	coord = 450;
 
 	else if( coord < -500 )
 
-		coord = -450;
+	coord = -450;
 
 	return coord;
 };
@@ -111,9 +131,17 @@ function positionate( pos )
 	var z = parseInt( pos.z - pos.z % 100 );
 
 	return { x: pos.x > 0 ? x + 50 : x - 50, z: pos.z > 0 ? z + 50 : z - 50 }
-}
+};
 
 function dintreTauler( )
 {
 	return ( -500 < Math.abs( pos.x ) && Math.abs( pos.x ) < 500 && -500 < Math.abs( pos.z ) && Math.abs( pos.z ) < 500 );
+};
+
+function aling()
+{
+	player.actual.rotation.y += -Math.PI * .5;
+	player.actual.rotation.y += -Math.PI * .5;
+	player.newRotation();
+	player.newRotation();
 }

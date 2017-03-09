@@ -1,11 +1,11 @@
-function Boat( x, z, size, name, url )
+function Boat( x, z, size, name, object )
 {
 	this.x = x;
 	this.z = z;
 	this.size = size;
 	this.life = size;
 	this.name = name;
-	this.object = factory.createBoat( url, name );
+	this.object = objectl
 	this.direction = 0;
 };
 
