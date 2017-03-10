@@ -63,7 +63,7 @@ var factory =
 	},
 
 /* ***************************************************** CREATE BOAT ***************************************************** */
-	createBoat: function( url, name, that )
+	createBoat: function( url, name, that, size )
 	{
 		var manager = new THREE.LoadingManager();
 		var loader = new THREE.OBJLoader( manager );
@@ -74,20 +74,27 @@ var factory =
 			{
 				if(child instanceof THREE.Mesh)
 				{
-					console.log("Carrego Mesh");
+					child.scale.x = 1.6;
 				}
 				object.name = name;
 			});
 
-			that.lenght = new THREE.Box3().setFromObject( object ).size();
+			that.boats.push( new Boat( object, size, name, new THREE.Box3().setFromObject( object ).size() ) );
 
-			that.positionate = that.lenght*.25;
+			that.actual = that.boats[ that.boats.length - 1 ]
 
-			that.actual = object;
-
-			that.rotation = 0;
-
-			scene.add( that.actual );
+			scene.add( that.actual.object );
 		});
+	},
+
+	createText: function( )
+	{
+		var material = new THREE.MeshPhongMaterial({ color: 0xdddddd });
+		var textGeom = new THREE.TextGeometry( 'Hello World!', {
+				font: 'Roboto Regular'
+		});
+		var textMesh = new THREE.Mesh( textGeom, material );
+
+		scene.add( textMesh );
 	}
 };

@@ -11,6 +11,8 @@ function init()
 
 	player = new Player( "iZac", avatar.brook );
 
+	player.loadBoats();
+
 	printMsg( "Hello, " + player.name, 1 );
 
 	adversarial = new Player( "Aurel", avatar.rufy );
@@ -45,6 +47,8 @@ function init()
 	scene.add( factory.createAxis( ) );
 
 	scene.add( player.actual );
+
+	//factory.createText();
 
 	geometry = scene.getObjectByName( "mar" ).geometry;
 
