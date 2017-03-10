@@ -52,7 +52,7 @@ container.addEventListener('mousemove', function(e)
 container.addEventListener('mousedown', function(e)
 {
 	if( !dintreTauler() )
-		
+
 		return;
 
 	switch( e.button )

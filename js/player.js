@@ -3,6 +3,7 @@ function Player( name, avatar )
   this.name = name;
   this.avatar = avatar;
   this.board = [];
+  
   this.boats = new Array();
   this.actual = null;
   this.maxBoats = 8;
@@ -12,7 +13,18 @@ function Player( name, avatar )
 
 Player.prototype.loadBoats = function()
 {
-  factory.createBoat( 'imatges/boat.obj', "Boat", this, 4 );
+  var size = 3
+
+  if( this.boats.length == 0)
+  {
+    size = 5;
+  }
+  else if ( this.boats.length == 1 || this.boats.length == 2 )
+  {
+    size = 4;
+  }
+
+  factory.createBoat( 'imatges/boat.obj', "Boat", this, size );
 };
 
 Player.prototype.loadBoard = function()
@@ -194,5 +206,5 @@ Player.prototype.alocateBoard = function( tiro )
 Player.prototype.newRotation = function()
 {
   this.actual.rotation++;
-  this.actual.rotation %= 4;
+  this.actual.rotation%=4;
 };

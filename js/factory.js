@@ -37,7 +37,7 @@ var factory =
 	},
 
 /* ********************************************************* PLANE ********************************************************* */
-	createPlane: function( dimensio, name )
+	createPlane: function( dimensio, name, imatge )
 	{
 		var size = dimensio * 100;
 
@@ -50,8 +50,13 @@ var factory =
 			material = new THREE.MeshPhongMaterial( {color: 0xffffff, wireframe: true } );
 
 		else
+		{
+			material = new THREE.MeshPhongMaterial( {map:textureLoader.load( imatge ), wireframe: false } );
 
-			material = new THREE.MeshPhongMaterial( {map:textureLoader.load( 'imatges/Calm-ocean.jpg'), wireframe: false } );
+			if( imatge.substr(imatge.length - 3) == "png" )
+
+				material.transparent = true;
+		}
 
 		var basePlane = new THREE.Mesh( geometry, material );
 
@@ -74,7 +79,14 @@ var factory =
 			{
 				if(child instanceof THREE.Mesh)
 				{
-					child.scale.x = 1.6;
+					if( size == 4 )
+					{
+						child.scale.x = 1.4;
+					}
+					else if( size == 5 )
+					{
+						child.scale.x = 1.8;
+					}
 				}
 				object.name = name;
 			});
@@ -85,16 +97,5 @@ var factory =
 
 			scene.add( that.actual.object );
 		});
-	},
-
-	createText: function( )
-	{
-		var material = new THREE.MeshPhongMaterial({ color: 0xdddddd });
-		var textGeom = new THREE.TextGeometry( 'Hello World!', {
-				font: 'Roboto Regular'
-		});
-		var textMesh = new THREE.Mesh( textGeom, material );
-
-		scene.add( textMesh );
 	}
 };

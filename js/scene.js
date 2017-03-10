@@ -29,7 +29,7 @@ function init()
 
 	camera.position.set( 0, SCREEN_HEIGHT * 2, 0 );
 
-	scene.add( camera );
+	//scene.add( camera );
 
 	renderer = factory.createRenderer( SCREEN_WIDTH, SCREEN_HEIGHT );
 
@@ -40,7 +40,9 @@ function init()
 
 	scene.add( factory.createLight( -1000, 200 * dimensio, 0, 0xffebcc ) );
 
-	scene.add( factory.createPlane( 20, "mar") );
+	scene.add( factory.createPlane( 20, "mar", 'imatges/Calm-ocean.jpg') );
+
+	scene.add( factory.createPlane( 12, "border", 'imatges/tauler.png') );
 
 	scene.add( factory.createPlane( dimensio, "tauler" ) );
 
@@ -48,11 +50,11 @@ function init()
 
 	scene.add( player.actual );
 
-	//factory.createText();
-
 	geometry = scene.getObjectByName( "mar" ).geometry;
 
-	scene.getObjectByName( "mar" ).position.y -= deep * 2;
+	scene.getObjectByName( "mar" ).position.y -= deep * 2; 
+	
+	scene.getObjectByName( "border" ).position.y -= deep; 
 
 	camera.lookAt( scene.getObjectByName( "tauler" ).position );
 };
