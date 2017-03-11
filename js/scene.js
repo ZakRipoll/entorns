@@ -42,7 +42,7 @@ function init()
 
 	scene.add( factory.createPlane( 20, "mar", 'imatges/Calm-ocean.jpg') );
 
-	scene.add( factory.createPlane( 12, "border", 'imatges/tauler.png') );
+	scene.add( factory.createPlane( 12.5, "border", 'imatges/tauler.png') );
 
 	scene.add( factory.createPlane( dimensio, "tauler" ) );
 
@@ -52,9 +52,9 @@ function init()
 
 	geometry = scene.getObjectByName( "mar" ).geometry;
 
-	scene.getObjectByName( "mar" ).position.y -= deep * 2; 
-	
-	scene.getObjectByName( "border" ).position.y -= deep; 
+	scene.getObjectByName( "mar" ).position.y -= deep * 2;
+
+	scene.getObjectByName( "border" ).position.y -= deep;
 
 	camera.lookAt( scene.getObjectByName( "tauler" ).position );
 };
