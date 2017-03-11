@@ -3,28 +3,39 @@ function Player( name, avatar )
   this.name = name;
   this.avatar = avatar;
   this.board = [];
-  
+
   this.boats = new Array();
   this.actual = null;
-  this.maxBoats = 8;
+  this.maxBoats = 11;
 
   this.loadBoard();
 };
 
 Player.prototype.loadBoats = function()
 {
-  var size = 3
+  var size;
 
-  if( this.boats.length == 0)
-  {
-    size = 5;
-  }
-  else if ( this.boats.length == 1 || this.boats.length == 2 )
-  {
-    size = 4;
+  switch (  this.boats.length ) {
+    case 0:
+      size = 5;
+    break;
+
+    case 1:
+    case 2:
+      size = 4
+    break;
+
+    case 3:
+    case 4:
+    case 5:
+      size = 3;
+    break;
+
+    default:
+      size = 2;
   }
 
-  factory.createBoat( 'imatges/boat.obj', "Boat", this, size );
+  factory.createBoat( 'imatges/boat.obj', "Boat", this, size, this.boats.length );
 };
 
 Player.prototype.loadBoard = function()
@@ -44,7 +55,7 @@ Player.prototype.detectShoot = function( tiro )
 {
   tiro = shoot.worldToBoard( tiro[ 0 ], tiro[ 1 ] );
 
-  return this.board[ tiro[ 0 ] ][ tiro[ 1 ] ] == 'x';
+  return this.board[ tiro[ 0 ] ][ tiro[ 1 ] ] !== '';
 };
 
 Player.prototype.maximumBoats = function ()
@@ -68,7 +79,7 @@ Player.prototype.boardPosition = function( tiro )
 
       for( var i = 0; i < this.actual.size; ++i )
       {
-        this.board[ x ][ z ] = 'x';
+        this.board[ x ][ z ] = this.actual.id;
         z--;
       }
 
@@ -83,7 +94,7 @@ Player.prototype.boardPosition = function( tiro )
 
       for( var i = 0; i < this.actual.size; ++i )
       {
-        this.board[ x ][ z ] = 'x';
+        this.board[ x ][ z ] = this.actual.id;
         x--;
       }
 
@@ -98,7 +109,7 @@ Player.prototype.boardPosition = function( tiro )
 
       for( var i = 0; i < this.actual.size; ++i )
       {
-        this.board[ x ][ z ] = 'x';
+        this.board[ x ][ z ] = this.actual.id;
         z++;
       }
 
@@ -113,7 +124,7 @@ Player.prototype.boardPosition = function( tiro )
 
       for( var i = 0; i < this.actual.size; ++i )
       {
-        this.board[ x ][ z ] = 'x';
+        this.board[ x ][ z ] = this.actual.id;
         x++;
       }
 
@@ -136,7 +147,7 @@ Player.prototype.alocateBoard = function( tiro )
 
       for( var i = 0; i < this.actual.size; ++i )
       {
-        if( this.board[ x ][ z ] == 'x' )
+        if( this.board[ x ][ z ] != '' )
         {
           return false;
         }
@@ -154,7 +165,7 @@ Player.prototype.alocateBoard = function( tiro )
 
       for( var i = 0; i < this.actual.size; ++i )
       {
-        if( this.board[ x ][ z ] == 'x' )
+        if( this.board[ x ][ z ] != '' )
         {
           return false;
         }
@@ -172,7 +183,7 @@ Player.prototype.alocateBoard = function( tiro )
 
       for( var i = 0; i < this.actual.size; ++i )
       {
-        if( this.board[ x ][ z ] == 'x' )
+        if( this.board[ x ][ z ] != '' )
         {
           return false;
         }
@@ -190,7 +201,7 @@ Player.prototype.alocateBoard = function( tiro )
 
       for( var i = 0; i < this.actual.size; ++i )
       {
-        if( this.board[ x ][ z ] == 'x' )
+        if( this.board[ x ][ z ] != '' )
         {
           return false;
         }

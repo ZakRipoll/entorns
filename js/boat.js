@@ -1,4 +1,4 @@
-function Boat( object, size, name, dimentions )
+function Boat( object, size, name, dimentions, id )
 {
 	this.object = object;
 	this.rotation = 0;
@@ -7,6 +7,7 @@ function Boat( object, size, name, dimentions )
 	this.size = size;
 	this.life = size;
 	this.name = name;
+	this.id = id;
 	this.x;
 	this.z;
 };
