@@ -27,7 +27,7 @@ Boat.prototype.isDead = function()
 /* ************************************************ SET DAMAGE TO THE BOAT ************************************************ */
 Boat.prototype.setDamage = function()
 {
-	if( !this.isDead )
+	if( !this.isDead() )
 
 		this.life--;
 };

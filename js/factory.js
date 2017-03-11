@@ -68,7 +68,7 @@ var factory =
 	},
 
 /* ***************************************************** CREATE BOAT ***************************************************** */
-	createBoat: function( url, name, that, size )
+	createBoat: function( url, name, that, size, id )
 	{
 		var manager = new THREE.LoadingManager();
 		var loader = new THREE.OBJLoader( manager );
@@ -91,7 +91,7 @@ var factory =
 				object.name = name;
 			});
 
-			that.boats.push( new Boat( object, size, name, new THREE.Box3().setFromObject( object ).size() ) );
+			that.boats.push( new Boat( object, size, name, new THREE.Box3().setFromObject( object ).size(), id ) );
 
 			that.actual = that.boats[ that.boats.length - 1 ]
 

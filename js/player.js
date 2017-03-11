@@ -7,6 +7,7 @@ function Player( name, avatar )
   this.boats = new Array();
   this.actual = null;
   this.maxBoats = 11;
+  this.deadBoats = 0;
 
   this.loadBoard();
 };
@@ -46,7 +47,7 @@ Player.prototype.loadBoard = function()
 
     for( var j = 0; j < 10; ++j )
     {
-      this.board[ i ][ j ] = "";
+      this.board[ i ][ j ] = "a";
     }
   }
 };
@@ -55,7 +56,7 @@ Player.prototype.detectShoot = function( tiro )
 {
   tiro = shoot.worldToBoard( tiro[ 0 ], tiro[ 1 ] );
 
-  return this.board[ tiro[ 0 ] ][ tiro[ 1 ] ] !== '';
+  return this.board[ tiro[ 0 ] ][ tiro[ 1 ] ];
 };
 
 Player.prototype.maximumBoats = function ()
@@ -147,7 +148,7 @@ Player.prototype.alocateBoard = function( tiro )
 
       for( var i = 0; i < this.actual.size; ++i )
       {
-        if( this.board[ x ][ z ] != '' )
+        if( this.board[ x ][ z ] != "a" )
         {
           return false;
         }
@@ -165,7 +166,7 @@ Player.prototype.alocateBoard = function( tiro )
 
       for( var i = 0; i < this.actual.size; ++i )
       {
-        if( this.board[ x ][ z ] != '' )
+        if( this.board[ x ][ z ] != "a" )
         {
           return false;
         }
@@ -183,7 +184,7 @@ Player.prototype.alocateBoard = function( tiro )
 
       for( var i = 0; i < this.actual.size; ++i )
       {
-        if( this.board[ x ][ z ] != '' )
+        if( this.board[ x ][ z ] != "a" )
         {
           return false;
         }
@@ -201,7 +202,7 @@ Player.prototype.alocateBoard = function( tiro )
 
       for( var i = 0; i < this.actual.size; ++i )
       {
-        if( this.board[ x ][ z ] != '' )
+        if( this.board[ x ][ z ] != "a" )
         {
           return false;
         }

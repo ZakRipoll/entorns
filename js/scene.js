@@ -19,7 +19,7 @@ function init()
 
 	printMsg( "Hello, " + player.name, 1 );
 
-	adversarial = new Player( "Aurel", avatar.rufy );
+	adversarial = { name: "Aurel", avatar: avatar.rufy };
 
 	printMsg( "Hello, " + adversarial.name, 0 );
 
@@ -82,4 +82,5 @@ function render()
 };
 
 init();
+
 render();

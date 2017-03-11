@@ -7,6 +7,17 @@ var messageStruck =
 	input: document.getElementById("Input")
 };
 
+var messageKind =
+{
+		connect: 1,
+		salue: 2,
+		message: 3,
+		shoot: 4,
+		hitmiss: 5,
+		result: 6,
+		disconect: 7
+};
+
 var avatar =
 {
 	brook: "imatges/Avatars/Brook.png",

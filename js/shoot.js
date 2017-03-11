@@ -69,6 +69,22 @@ var shoot =
 
   oneShoot: function( x, z )
   {
-    destroy.add( debug.createCubeRay( z, 1, x, player.detectShoot( [ x, z ] ) ) );
+    var acert =  player.detectShoot( [ x, z ] );
+    var nombre = !isNaN( acert );
+
+    destroy.add( debug.createCubeRay( z, 1, x, nombre ) );
+
+    if( nombre )
+    {
+      player.boats[ acert ].setDamage();
+
+       if( player.boats[ acert ].isDead() )
+       {
+         player.deadBoats++;
+
+         return true;
+       }
+    }
+    return false;
   },
 };
