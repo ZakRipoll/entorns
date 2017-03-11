@@ -69,6 +69,6 @@ var shoot =
 
   oneShoot: function( x, z )
   {
-    scene.add( debug.createCubeRay( z, 1, x, player.detectShoot( [ x, z ] ) ) );
+    destroy.add( debug.createCubeRay( z, 1, x, player.detectShoot( [ x, z ] ) ) );
   },
 };

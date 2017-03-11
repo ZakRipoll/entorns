@@ -19,6 +19,6 @@ var debug =
 
 		cube.position.set( x, y, z );
 
-		scene.add( cube );
+		return cube;
 	}
 };

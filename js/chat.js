@@ -7,6 +7,12 @@ messageStruck.chat.addEventListener("keyup", function(event)
 
 	var tiro = messageStruck.input.value;
 
+	if( tiro == "escena" )
+	{
+		actualdesk = !actualdesk;
+		return;
+	};
+
 	if( tiro.length == 2 && shoot.isShoot( shoot.gameToWorld( tiro[ 0 ], tiro[ 1 ] ) ) )
 
 		possibleShoot( shoot.gameToWorld( tiro[ 0 ],  tiro[ 1 ] ) );

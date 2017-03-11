@@ -1,13 +1,15 @@
 /* ************************************** google-chrome --allow-file-access-from-files ************************************** */
-var container, desk, scene, camera, renderer, geometry, textureLoader;
+var container, desk, scene, destroy, camera, renderer, geometry, textureLoader;
 var dimensio = 10, c = 0, amplada = 5, rotations = 0
-var player, adversarial
+var player, adversarial, actualdesk = 1
 
 function init()
 {
-	desk = new THREE.Scene();
+	destroy = new THREE.Scene();
 
 	scene = new THREE.Scene();
+
+	desk = new THREE.Scene();
 
 	textureLoader = new THREE.TextureLoader();
 
@@ -63,6 +65,8 @@ function init()
 	scene.add( factory.createLight( 0, 200 * dimensio, 0, 0xffffff ) );
 
 	scene.add( player.actual );
+
+	destroy.add( factory.createLight( 0, 200 * dimensio, 0, 0xffffff ) );
 };
 
 /* ********************************************************* RENDER ********************************************************* */
@@ -76,7 +80,7 @@ function render()
 	renderer.render( desk, camera );
 
 	renderer.clearDepth();
-	renderer.render( scene, camera );
+	renderer.render( actualdesk ? scene : destroy, camera );
 };
 
 init();
