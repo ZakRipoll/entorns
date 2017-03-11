@@ -1,10 +1,12 @@
 /* ************************************** google-chrome --allow-file-access-from-files ************************************** */
-var container, scene, camera, renderer, geometry, textureLoader;
+var container, desk, scene, camera, renderer, geometry, textureLoader;
 var dimensio = 10, c = 0, amplada = 5, rotations = 0
 var player, adversarial
 
 function init()
 {
+	desk = new THREE.Scene();
+
 	scene = new THREE.Scene();
 
 	textureLoader = new THREE.TextureLoader();
@@ -33,30 +35,34 @@ function init()
 
 	renderer = factory.createRenderer( SCREEN_WIDTH, SCREEN_HEIGHT );
 
+	renderer.autoClear = false;
+
 	container.appendChild( renderer.domElement );
 
 	THREEx.WindowResize(renderer, camera);
 	THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) });
 
-	scene.add( factory.createLight( -1000, 200 * dimensio, 0, 0xffebcc ) );
+	desk.add( factory.createLight( -1000, 200 * dimensio, -1000, 0xffebcc ) );
 
-	scene.add( factory.createPlane( 20, "mar", 'imatges/Calm-ocean.jpg') );
+	desk.add( factory.createPlane( 20, "mar", 'imatges/Calm-ocean.jpg') );
 
-	scene.add( factory.createPlane( 12.5, "border", 'imatges/tauler.png') );
+	desk.add( factory.createPlane( 12.5, "border", 'imatges/tauler.png') );
 
-	scene.add( factory.createPlane( dimensio, "tauler" ) );
+	desk.add( factory.createPlane( dimensio, "tauler" ) );
 
-	scene.add( factory.createAxis( ) );
+	desk.add( factory.createAxis( ) );
+
+	geometry = desk.getObjectByName( "mar" ).geometry;
+
+	desk.getObjectByName( "mar" ).position.y -= deep * 2;
+
+	desk.getObjectByName( "border" ).position.y -= deep;
+
+	camera.lookAt( desk.getObjectByName( "tauler" ).position );
+
+	scene.add( factory.createLight( 0, 200 * dimensio, 0, 0xffffff ) );
 
 	scene.add( player.actual );
-
-	geometry = scene.getObjectByName( "mar" ).geometry;
-
-	scene.getObjectByName( "mar" ).position.y -= deep * 2;
-
-	scene.getObjectByName( "border" ).position.y -= deep;
-
-	camera.lookAt( scene.getObjectByName( "tauler" ).position );
 };
 
 /* ********************************************************* RENDER ********************************************************* */
@@ -66,7 +72,11 @@ function render()
 
 	requestAnimationFrame( render );
 
-	renderer.render(scene, camera);
+	renderer.clear();
+	renderer.render( desk, camera );
+
+	renderer.clearDepth();
+	renderer.render( scene, camera );
 };
 
 init();

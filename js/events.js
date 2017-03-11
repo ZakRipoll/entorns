@@ -100,7 +100,7 @@ function raycasting( x, y )
 
 	raycaster.setFromCamera( screenMouse, camera );
 
-	var intersects = raycaster.intersectObjects( scene.children );
+	var intersects = raycaster.intersectObjects( desk.children );
 
 	if ( intersects.length == 0 )
 
