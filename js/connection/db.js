@@ -8,29 +8,28 @@ var config = {
 };
 firebase.initializeApp(config);
 
-function login(user,pass)
+function login(user,password)
 {
-  firebase.auth().signInWithEmailAndPassword(user + "@lamamadenbambi.cat", password).catch(function(error) {
+  firebase.auth().signInWithEmailAndPassword(user + "@lamamadenbambi.cat", password).catch(function(error)
+  {
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
     // ...
+    console.log( errorMessage.length );
   });
+
+  player = new Player(firebase.auth().currentUser.email.split("@")[0], firebase.auth().currentUser.photoURL);
+
+  start();
 }
 function signup(user,password)
 {
-  firebase.auth().createUserWithEmailAndPassword(user + "@lamamadenbambi.cat", password).catch(function(error) {
+  firebase.auth().createUserWithEmailAndPassword(user + "@lamamadenbambi.cat", password).catch(function(error)
+  {
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
-    console.log( errorMessage );
     // ...
   });
-
-  console.log( firebase.auth().currentUser );
-}
-
-function avatar()
-{
-  firebase.auth().currentUser.photoURL = avatar.zoro;
 }

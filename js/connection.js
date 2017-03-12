@@ -28,5 +28,3 @@ server.on_close = function()
 {
 	server.sendMessage( JSON.stringify( {typer: messageKind.disconect } ) );
 };
-
-connect();

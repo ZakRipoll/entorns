@@ -13,15 +13,11 @@ function init()
 
 	textureLoader = new THREE.TextureLoader();
 
-	player = new Player( "iZac", avatar.brook );
+	//player = new Player( "iZac", avatar.brook );
 
 	player.loadBoats();
 
 	printMsg( "Hello, " + player.name, 1 );
-
-	//adversarial = { name: "Aurel", avatar: avatar.rufy };
-
-	//printMsg( "Hello, " + adversarial.name, 0 );
 
 	container = document.getElementById( "ThreeJS" );
 
@@ -80,7 +76,3 @@ function render()
 	renderer.clearDepth();
 	renderer.render( actualdesk ? scene : destroy, camera );
 };
-
-init();
-
-//render();
