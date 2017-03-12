@@ -50,6 +50,15 @@ Player.prototype.loadBoard = function()
       this.board[ i ][ j ] = "a";
     }
   }
+  this.fillTable();
+};
+
+Player.prototype.fillTable = function()
+{
+  for( var i = 0; i < 5; i++ )
+  {
+    this.board[0][i] = 0;
+  }
 };
 
 Player.prototype.detectShoot = function( tiro )

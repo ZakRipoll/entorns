@@ -11,6 +11,53 @@
 
 <body>
 
+	<div id = "loginContainer">
+
+		<div id = "login">
+
+			<div id = "header">
+
+				<div id = "signup">
+					SIGN UP
+				</div>
+
+				<div id = "loginButton">
+					LOGIN
+				</div>
+
+			</div>
+
+			<div id = "intpusSignUp" class="visible">
+				<input type="text" name = "userName" placeholder="Username" >
+				<input type="password" name = "password" placeholder="Password" >
+				<input type="password" name = "passwordConfirm" placeholder="Confirm password" >
+			</div>
+
+			<div id = "intpusLogIn">
+				<input type="text" name = "userName" placeholder="Username" >
+				<input type="password" name = "password" placeholder="Password" >
+			</div>
+
+			<div id = "icons">
+				<div class="icon selected"><img src="imatges/Avatars/Robin.png" alt="Robin"></div>
+				<div class="icon"><img src="imatges/Avatars/Brook.png" alt="Brook"></div>
+				<div class="icon"><img src="imatges/Avatars/Franky.png" alt="Franky"></div>
+				<div class="icon"><img src="imatges/Avatars/Zoro.png" alt="Zoro"></div>
+				<div class="icon"><img src="imatges/Avatars/Rufy.png" alt="Rufy"></div>
+				<div class="icon"><img src="imatges/Avatars/Sanji.png" alt="Sanji"></div>
+				<div class="icon"><img src="imatges/Avatars/Usopp.png" alt="Usopp"></div>
+				<div class="icon"><img src="imatges/Avatars/Chopper.png" alt="Chopper"></div>
+				<div class="icon"><img src="imatges/Avatars/Nami.png" alt="Nami"></div>
+			</div>
+
+			<div id = "submit">
+				SING UP
+			</div>
+
+		</div>
+
+	</div>
+
 	<div id = "Commands"></div>
 
 	<div id = "ChatContainer">
@@ -83,5 +130,15 @@
 <script type = "text/javascript" src = "js/scene.js"></script>
 <!-- EVENTS -->
 <script type = "text/javascript" src = "js/events.js"></script>
+<!-- SILLY SERVER -->
+<script type = "text/javascript" src="js/libs/sillyclient.js"></script>
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script>
+<script type = "text/javascript" src="js/connection/db.js"></script>
+<script type = "text/javascript" src="js/connection/singup.js"></script>
+<script type = "text/javascript" src="js/connection/login.js"></script>
+<!-- SERVER AND MESSAGE -->
+<script type = "text/javascript" src = "js/connection.js"></script>
+<script type = "text/javascript" src = "js/missatges.js"></script>
 
 </html>

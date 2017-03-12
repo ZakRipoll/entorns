@@ -51,17 +51,17 @@ function checkMessage ( tiro )
 
 		printHitMiss( encert );
 
-		//server.sendMessage( JSON.stringify( { type: messageKind.hitmis, bool: encert } ) );
+		server.sendMessage( JSON.stringify( { type: messageKind.hitmis, bool: encert } ) );
 };
 
 function printHitMiss( encert )
 {
 	printMsg( "It's a " + ( encert ? "hit" : "miss" ) , 0 );
-}
+};
 
 function sendMsg( msg )
 {
-	//server.sendMessage( JSON.stringify( { type: messageKind.message, message: msg } ) );
+	server.sendMessage( JSON.stringify( { type: messageKind.message, message: msg } ) );
 
 	printMsg( msg, 1 );
 };

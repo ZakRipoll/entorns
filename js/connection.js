@@ -6,14 +6,13 @@ var server = new SillyClient();
 
 function connect()
 {
-	document.getElementById("connecting").style.visibility='visible';
 	server.connect("84.89.136.194:9000", room_name);
 };
 
 //this method is called when the user gets connected to the server
 server.on_ready = function( id )
 {
-	server.sendMessage( JSON.stringify( {typer: messageKind.connect, name: player.name, avatar: player.avatar } ) );
+	server.sendMessage( JSON.stringify( {type: messageKind.connect, name: player.name, avatar: player.avatar } ) );
 };
 
 //this methods receives messages from other users (author_id its an unique identifier)
@@ -29,3 +28,5 @@ server.on_close = function()
 {
 	server.sendMessage( JSON.stringify( {typer: messageKind.disconect } ) );
 };
+
+connect();

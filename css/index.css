@@ -1,9 +1,128 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
+.selected{
+  border: 1px solid blue;
+  width: calc( (100% / 6) - 2px) !important;
+
+}
+
 body
 {
   margin: 0;
   overflow: hidden;
+}
+
+#loginContainer
+{
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, .5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
+
+#login
+{
+  width: 30%;
+  background-color: lightgrey;
+  padding: 10px;
+}
+
+#header
+{
+  width: 100%;
+  height: 30px;
+  background-color: green;
+  margin-bottom: 10px;
+}
+#signup, #loginButton
+{
+  width: 50%;
+  height: 100%;
+  float: left;
+  text-align: center;
+  line-height: 30px;
+}
+
+#signup:hover, #loginButton:hover
+{
+  background-color: lightgreen;
+}
+
+#intpusSignUp
+{
+  width: 100%;
+  margin-bottom: 10px;
+
+}
+
+#intpusSignUp input
+{
+  width: calc( 100% - 25px );
+  height: 30px;
+
+  padding: 0 10px;
+  margin-bottom: 10px;
+
+}
+
+#intpusSignUp input:last-child
+{
+  margin-bottom: 0;
+}
+
+#intpusLogIn
+{
+  display: none;
+
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+#intpusLogIn input
+{
+  width: calc( 100% - 25px );
+  height: 30px;
+  padding: 0 10px;
+  margin-bottom: 10px;
+}
+
+#intpusLogIn input:last-child
+{
+  margin-bottom: 0;
+}
+
+#icons
+{
+
+ display: flex;
+  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.icon
+{
+  width: calc( 100% / 6 );
+}
+
+.icon img
+{
+  width: 100%;
+  height: auto;
+}
+#submit
+{
+  width: 100%;
+  height: 30px;
+  background-color: green;
+  text-align: center;
+  line-height: 30px;
 }
 
 #Commands
@@ -24,7 +143,6 @@ body
   width: 20vw;
   height: 100vh;
   background-color: black;
-  /*opacity: 0.5;*/
 }
 
 #InputContainer

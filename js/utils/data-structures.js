@@ -10,7 +10,7 @@ var messageStruck =
 var messageKind =
 {
 		connect: 1,
-		salue: 2,
+		salute: 2,
 		message: 3,
 		shoot: 4,
 		hitmiss: 5,

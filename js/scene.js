@@ -19,9 +19,9 @@ function init()
 
 	printMsg( "Hello, " + player.name, 1 );
 
-	adversarial = { name: "Aurel", avatar: avatar.rufy };
+	//adversarial = { name: "Aurel", avatar: avatar.rufy };
 
-	printMsg( "Hello, " + adversarial.name, 0 );
+	//printMsg( "Hello, " + adversarial.name, 0 );
 
 	container = document.getElementById( "ThreeJS" );
 
@@ -83,4 +83,4 @@ function render()
 
 init();
 
-render();
+//render();

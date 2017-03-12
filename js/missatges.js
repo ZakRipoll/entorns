@@ -1,6 +1,6 @@
 var missatges =
 {
-  function missatge( msg )
+  missatge: function( msg )
   {
     msg = JSON.parse( msg );
 
@@ -8,11 +8,13 @@ var missatges =
     {
       case messageKind.connect:
 
-      server.sendMessage( JSON.stringify( {typer: messageKind.salute, name: player.name, avatar: player.avatar } ) );
+      server.sendMessage( JSON.stringify( {type: messageKind.salute, name: player.name, avatar: player.avatar } ) );
 
       case messageKind.salute:
 
         adversarial = { name: msg.name, avatar: msg.avatar };
+
+        printMsg( "Hi I'm " + msg.name, 0 );
 
       break;
 
@@ -46,5 +48,5 @@ var missatges =
 
       break;
     };
-  };
+  }
 };
