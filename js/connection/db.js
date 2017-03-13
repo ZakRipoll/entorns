@@ -14,7 +14,7 @@ function login(user,password, callback)
   {
 
   player = new Player(user.email.split("@")[0], user.photoURL);
-  callback();
+  callback( "room1" );
 
 }, function(error)
   {

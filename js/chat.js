@@ -51,7 +51,7 @@ function checkMessage ( tiro )
 
 		printHitMiss( encert );
 
-		server.sendMessage( JSON.stringify( { type: messageKind.hitmis, bool: encert } ) );
+		connection.server.sendMessage( JSON.stringify( { type: messageKind.hitmis, bool: encert } ) );
 };
 
 function printHitMiss( encert )
@@ -61,7 +61,7 @@ function printHitMiss( encert )
 
 function sendMsg( msg )
 {
-	server.sendMessage( JSON.stringify( { type: messageKind.message, message: msg } ) );
+	connection.server.sendMessage( JSON.stringify( { type: messageKind.message, message: msg } ) );
 
 	printMsg( msg, 1 );
 };

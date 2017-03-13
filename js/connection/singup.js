@@ -1,3 +1,4 @@
+var connection
 document.querySelector('[name = "passwordConfirm"]').addEventListener("keydown", keyDownTextField, false);
 document.getElementById('signup').addEventListener("click", showSignup, false);
 document.querySelector('#submit').addEventListener("click", click, false);
@@ -48,7 +49,7 @@ onSignUp = function()
 
     player = new Player( nomUsuari, imatge );
 
-    start();
+    start( "room" );
   }
 }
 
@@ -59,8 +60,6 @@ function chooseIcon()
 
 setProfilePictue = function( imatge, usuari )
 {
-    console.log( imatge );
-
     usuari.updateProfile({
     displayName: "avtatar",
     photoURL: imatge
@@ -71,17 +70,17 @@ setProfilePictue = function( imatge, usuari )
     });
 }
 
-function start()
+function start(room)
 {
   document.getElementById( "loginContainer" ).style.display = "none";
 
   init();
 
-  connect();
-
   comencem();
 
-  read();
-
   render();
+
+  connection = new Connection( !document.getElementById(room).value ? player.name : document.getElementById(room).value );
+
+  connection.connect();
 }
