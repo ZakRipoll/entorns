@@ -46,7 +46,7 @@ onSignUp = function()
 
     var split = document.querySelector(".selected").children[0].src.split("/");
 
-    var imatge = split[9] + "/" + split[10]+ "/" + split[11];
+    var imatge = split[split.length-3] + "/" + split[split.length-2]+ "/" + split[split.length-1];
 
     player = new Player( nomUsuari, imatge );
 
@@ -84,6 +84,8 @@ function start()
   connect();
 
   comencem();
+
+  read();
 
   render();
 }
