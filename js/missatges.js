@@ -30,7 +30,7 @@ var missatges =
 
         var tiro = shoot.gameToBoard(  msg.x, msg.y );
 
-        var encert =  player.isWater( tiro[0], tiro[1] );
+        var encert = player.isWater( tiro[0], tiro[1] );
 
         connection.server.sendMessage( JSON.stringify( {type: messageKind.hitmiss, bool: encert, x: tiro[0], y: tiro[1] } ) );
 

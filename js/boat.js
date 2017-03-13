@@ -3,7 +3,7 @@ function Boat( object, size, name, dimentions, id )
 	this.object = object;
 	this.rotation = 0;
 	this.dimentions = dimentions;
-	this.lenght = dimentions.x * .25;
+	this.lenght = dimentions.x/size;
 	this.size = size;
 	this.life = size;
 	this.name = name;

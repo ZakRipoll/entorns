@@ -21,7 +21,8 @@ Player.prototype.loadBoats = function()
 {
   var size;
 
-  switch (  this.boats.length ) {
+  switch (  this.boats.length )
+  {
     case 0:
       size = 5;
     break;
@@ -42,6 +43,11 @@ Player.prototype.loadBoats = function()
   }
 
   factory.createBoat( 'imatges/boat.obj', "Boat", this, size, this.boats.length );
+
+  if( this.maximumBoats() )
+  {
+    this.actual = null;
+  }
 };
 
 Player.prototype.loadBoard = function()
@@ -54,15 +60,6 @@ Player.prototype.loadBoard = function()
     {
       this.board[ i ][ j ] = "a";
     }
-  }
-  //this.fillTable();
-};
-
-Player.prototype.fillTable = function()
-{
-  for( var i = 0; i < 5; i++ )
-  {
-    this.board[0][i] = 0;
   }
 };
 
@@ -87,9 +84,9 @@ Player.prototype.boardPosition = function( tiro )
   {
     case 0:
 
-      if ( z < this.actual.size - 1 )
+      if ( z < this.actual.size )
       {
-        z = this.actual.size - 1;
+        z = this.actual.size;
       }
 
       for( var i = 0; i < this.actual.size; ++i )
@@ -102,9 +99,9 @@ Player.prototype.boardPosition = function( tiro )
 
     case 1:
 
-      if ( x < this.actual.size - 1 )
+      if ( x < this.actual.size )
       {
-        x = this.actual.size - 1;
+        x = this.actual.size;
       }
 
       for( var i = 0; i < this.actual.size; ++i )
@@ -234,3 +231,8 @@ Player.prototype.newRotation = function()
   this.actual.rotation++;
   this.actual.rotation%=4;
 };
+
+Player.prototype.allDeath = function()
+{
+  return this.deadBoats == this.maximumBoats;
+}

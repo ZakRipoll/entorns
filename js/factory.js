@@ -75,17 +75,23 @@ var factory =
 
 		loader.load( url, function ( object )
 		{
-			object.traverse(function( child )
+			object.traverse( function( child )
 			{
-				if(child instanceof THREE.Mesh)
+				if( child instanceof THREE.Mesh )
 				{
-					if( size == 4 )
+					if( size == 2 )
+					{
+						child.scale.x = .6;
+					}
+					else if( size == 4 )
 					{
 						child.scale.x = 1.4;
+						child.scale.z = 1.1;
 					}
 					else if( size == 5 )
 					{
 						child.scale.x = 1.8;
+						child.scale.z = 1.2;
 					}
 				}
 				object.name = name;
@@ -93,7 +99,7 @@ var factory =
 
 			that.boats.push( new Boat( object, size, name, new THREE.Box3().setFromObject( object ).size(), id ) );
 
-			that.actual = that.boats[ that.boats.length - 1 ]
+			that.actual = that.boats[ that.boats.length - 1 ];
 
 			scene.add( that.actual.object );
 		});

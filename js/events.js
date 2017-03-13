@@ -20,7 +20,7 @@ function moure(e)
 
 	if( player.actual.rotation == 0 )
 	{
-		if( cell[0] > 1 )
+		if( cell[0] >	parseInt( player.actual.size *.5 - !( player.actual.size % 2 ) ) )
 		{
 			player.actual.object.position.x = onTauler( pos.x ) - player.actual.lenght;
 		}
@@ -73,8 +73,6 @@ function clickar(e)
 			if( player.maximumBoats() || !player.alocateBoard( shoot.worldToBoard( pos.x, pos.z ) ) )
 
 				break;
-
-			//scene.add( player.actual );
 
 			player.loadBoats();
 
