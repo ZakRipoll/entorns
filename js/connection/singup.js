@@ -50,7 +50,7 @@ onSignUp = function()
 
     player = new Player( nomUsuari, imatge );
 
-    setProfilePictue( imatge, ref.unauth() );
+    //setProfilePictue( imatge, ref.unauth() );
 
     start();
   }
@@ -81,9 +81,9 @@ function start()
 
   init();
 
-  render();
-
   connect();
 
-  initEvents();
+  comencem();
+
+  render();
 }

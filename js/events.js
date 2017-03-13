@@ -1,112 +1,102 @@
 var pos, c = 0, auxili;
 
-function initEvents()
+function comencem()
 {
-	moure();
-	clickar();
-	menu();
-}
+	container.addEventListener("mousemove", moure, false);
 
-/* ****************************************************** MOUSEMOVE ****************************************************** */
-function moure() 
-{
-	container.addEventListener('mousemove', function(e)
-	{
-		pos = positionate( raycasting( e.offsetX, e.offsetY ) );
+	container.addEventListener("click", clickar, false);
 
-		var cell = shoot.worldToBoard( pos.x, pos.z )
-
-		if( player.actual.rotation == 0 )
-		{
-			if( cell[0] > 1 )
-			{
-				player.actual.object.position.x = onTauler( pos.x ) - player.actual.lenght;
-			}
-		}
-		else if( player.actual.rotation == 2 )
-		{
-			if( cell[0] < 8 )
-			{
-				player.actual.object.position.x = onTauler( pos.x ) + player.actual.lenght;
-			}
-		}
-		else
-		{
-			player.actual.object.position.x = onTauler( pos.x );
-		}
-
-
-		player.actual.object.position.y = dimensio * 5;
-
-		if( player.actual.rotation == 1 )
-		{
-			if( cell[1] > 1 )
-			{
-				player.actual.object.position.z = onTauler( pos.z ) - player.actual.lenght;
-			}
-		}
-		else if( player.actual.rotation == 3 )
-		{
-			if( cell[1] < 8 )
-			{
-				player.actual.object.position.z = onTauler( pos.z ) + player.actual.lenght;
-			}
-		}
-		else
-		{
-			player.actual.object.position.z = onTauler( pos.z );
-		}
-	}, false);
-};
-
-function clickar()
-{
-	container.addEventListener('mousedown', function(e)
-	{
-		if( !dintreTauler() )
-
-			return;
-
-		switch( e.button )
-		{
-			case 0:
-
-				if( player.maximumBoats() || !player.alocateBoard( shoot.worldToBoard( pos.x, pos.z ) ) )
-
-					break;
-
-				scene.add( player.actual );
-
-				player.loadBoats();
-
-				player.boardPosition( shoot.worldToBoard( pos.x, pos.z ) );
-
-			break;
-
-			case 1:
-
-				player.actual.object.rotation.y += -Math.PI * .5;
-
-				player.newRotation();
-
-			break;
-
-			case 2:
-
-				directShoot( [ pos.z, pos.x ] );
-
-			break;
-		};
-	}, false);
-};
-
-function initEvents()
-{
 	container.oncontextmenu = function () {
 		return false;
 	}
+}
+
+/* ****************************************************** MOUSEMOVE ****************************************************** */
+function moure(e)
+{
+	pos = positionate( raycasting( e.offsetX, e.offsetY ) );
+
+	var cell = shoot.worldToBoard( pos.x, pos.z )
+
+	if( player.actual.rotation == 0 )
+	{
+		if( cell[0] > 1 )
+		{
+			player.actual.object.position.x = onTauler( pos.x ) - player.actual.lenght;
+		}
+	}
+	else if( player.actual.rotation == 2 )
+	{
+		if( cell[0] < 8 )
+		{
+			player.actual.object.position.x = onTauler( pos.x ) + player.actual.lenght;
+		}
+	}
+	else
+	{
+		player.actual.object.position.x = onTauler( pos.x );
+	}
+
+
+	player.actual.object.position.y = dimensio * 5;
+
+	if( player.actual.rotation == 1 )
+	{
+		if( cell[1] > 1 )
+		{
+			player.actual.object.position.z = onTauler( pos.z ) - player.actual.lenght;
+		}
+	}
+	else if( player.actual.rotation == 3 )
+	{
+		if( cell[1] < 8 )
+		{
+			player.actual.object.position.z = onTauler( pos.z ) + player.actual.lenght;
+		}
+	}
+	else
+	{
+		player.actual.object.position.z = onTauler( pos.z );
+	}
 };
 
+function clickar(e)
+{
+	if( !dintreTauler() )
+
+		return;
+
+	switch( e.button )
+	{
+		case 0:
+
+			if( player.maximumBoats() || !player.alocateBoard( shoot.worldToBoard( pos.x, pos.z ) ) )
+
+				break;
+
+			//scene.add( player.actual );
+
+			player.loadBoats();
+
+			player.boardPosition( shoot.worldToBoard( pos.x, pos.z ) );
+
+		break;
+
+		case 1:
+
+			player.actual.object.rotation.y += -Math.PI * .5;
+
+			player.newRotation();
+
+		break;
+
+		case 2:
+
+			directShoot( [ pos.z, pos.x ] );
+
+		break;
+	};
+};
 /* ***************************************************** RAY TRAICING **************************************************** */
 function raycasting( x, y )
 {
