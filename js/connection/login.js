@@ -1,6 +1,5 @@
 document.getElementById('loginButton').addEventListener("click", showLogin, false);
 
-
 function showLogin( )
 {
   document.getElementById( "intpusSignUp" ).style.display = "none";
@@ -12,5 +11,5 @@ function showLogin( )
 onLogin = function()
 {
   var container = document.getElementById('intpusLogIn');
-  login( container.children[0].value, container.children[1].value );
+  login( container.children[0].value, container.children[1].value, start );
 }

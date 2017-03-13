@@ -8,9 +8,15 @@ var config = {
 };
 firebase.initializeApp(config);
 
-function login(user,password)
+function login(user,password, callback)
 {
-  firebase.auth().signInWithEmailAndPassword(user + "@lamamadenbambi.cat", password).catch(function(error)
+  firebase.auth().signInWithEmailAndPassword(user + "@lamamadenbambi.cat", password).then(function(user)
+  {
+
+  player = new Player(user.email.split("@")[0], user.photoURL);
+  callback();
+
+}, function(error)
   {
     // Handle Errors here.
     var errorCode = error.code;
@@ -18,18 +24,26 @@ function login(user,password)
     // ...
     console.log( errorMessage.length );
   });
-
-  player = new Player(firebase.auth().currentUser.email.split("@")[0], firebase.auth().currentUser.photoURL);
-
-  start();
 }
-function signup(user,password)
+function signup(user, password, imatge, callback)
 {
-  firebase.auth().createUserWithEmailAndPassword(user + "@lamamadenbambi.cat", password).catch(function(error)
+  //signOut();
+  firebase.auth().createUserWithEmailAndPassword(user + "@lamamadenbambi.cat", password).then(function(user) {
+  callback( imatge, user);
+}, function(error)
   {
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
     // ...
   });
+}
+
+function signout()
+{
+  firebase.auth().signOut().then(function() {
+  // Sign-out successful.
+}, function(error) {
+  // An error happened.
+});
 }

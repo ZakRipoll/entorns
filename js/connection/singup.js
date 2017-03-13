@@ -1,5 +1,3 @@
-var usuari;
-
 document.querySelector('[name = "passwordConfirm"]').addEventListener("keydown", keyDownTextField, false);
 document.getElementById('signup').addEventListener("click", showSignup, false);
 document.querySelector('#submit').addEventListener("click", click, false);
@@ -42,15 +40,13 @@ onSignUp = function()
 
   if( nomUsuari && contrasenya == document.querySelector('[name = "passwordConfirm"]').value )
   {
-    var user = signup( nomUsuari, contrasenya );
-
     var split = document.querySelector(".selected").children[0].src.split("/");
 
     var imatge = split[split.length-3] + "/" + split[split.length-2]+ "/" + split[split.length-1];
 
-    player = new Player( nomUsuari, imatge );
+    var user = signup( nomUsuari, contrasenya, imatge, setProfilePictue );
 
-    //setProfilePictue( imatge, ref.unauth() );
+    player = new Player( nomUsuari, imatge );
 
     start();
   }
