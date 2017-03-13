@@ -30,13 +30,13 @@ var missatges =
 
         var tiro = shoot.gameToBoard(  msg.x, msg.y );
 
-        connection.server.sendMessage( JSON.stringify( {type: messageKind.hitmiss, bool: player.isWater( tiro[0], tiro[1] ) } ) );
+        connection.server.sendMessage( JSON.stringify( {type: messageKind.hitmiss, bool: player.isWater( tiro[0], tiro[1] ), x: tiro[0], y: tiro[1] } ) );
 
       break;
 
       case messageKind.hitmiss:
 
-        printHitMiss( msg.bool );
+        printHitMiss( msg.bool, shoot.boardToWorld( msg.x, msg.y ) );
 
       break;
 

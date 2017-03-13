@@ -1,3 +1,4 @@
+var coords
 messageStruck.chat.addEventListener("keyup", function(event)
 {
 	event.preventDefault();
@@ -40,7 +41,7 @@ function directShoot( tiro )
 function nouOnCommand( tiro )
 {
 	printMsg( shoot.printGame( tiro[0], tiro[1] ), 1);
-	
+
 	connection.server.sendMessage( JSON.stringify( {type: messageKind.shoot, x: tiro[0], y: tiro[1] } ) );
 };
 
@@ -65,9 +66,11 @@ function checkMessage ( tiro )
 		connection.server.sendMessage( JSON.stringify( { type: messageKind.hitmis, bool: encert } ) );
 };
 
-function printHitMiss( encert )
+function printHitMiss( encert, tiro )
 {
 	printMsg( "It's a " + ( encert ? "hit" : "miss" ) , 0 );
+
+	destroy.add( debug.createCubeRay( tiro[1], 1, tiro[0], encert ) );
 };
 
 function sendMsg( msg )
