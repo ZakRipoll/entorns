@@ -9,8 +9,7 @@ var debug =
 
 	createCube: function ( hit )
 	{
-		return new THREE.Mesh( 	new THREE.CubeGeometry( this.dimention, 1, this.dimention  ),
-								hit ? new THREE.MeshLambertMaterial({color: 0x990000}) :  new THREE.MeshNormalMaterial() );
+		return new THREE.Mesh( 	new THREE.CubeGeometry( this.dimention, 1, this.dimention  ), hit );
 	},
 
 	createCubeRay: function ( x, y, z, hit )

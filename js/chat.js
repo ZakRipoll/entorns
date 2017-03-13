@@ -70,7 +70,7 @@ function printHitMiss( encert, tiro )
 {
 	printMsg( "It's a " + ( encert ? "hit" : "miss" ) , 0 );
 
-	destroy.add( debug.createCubeRay( tiro[1], 1, tiro[0], encert ) );
+	destroy.add( debug.createCubeRay( tiro[1], 1, tiro[0], encert ? new THREE.MeshLambertMaterial({color: 0x990000}) :  new THREE.MeshNormalMaterial() ) );
 };
 
 function sendMsg( msg )

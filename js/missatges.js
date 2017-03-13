@@ -30,7 +30,13 @@ var missatges =
 
         var tiro = shoot.gameToBoard(  msg.x, msg.y );
 
-        connection.server.sendMessage( JSON.stringify( {type: messageKind.hitmiss, bool: player.isWater( tiro[0], tiro[1] ), x: tiro[0], y: tiro[1] } ) );
+        var encert =  player.isWater( tiro[0], tiro[1] );
+
+        connection.server.sendMessage( JSON.stringify( {type: messageKind.hitmiss, bool: encert, x: tiro[0], y: tiro[1] } ) );
+
+        tiro = shoot.boardToWorld( tiro[0], tiro[1] );
+
+        scene.add( debug.createCubeRay( tiro[1], 1, tiro[0], encert ? new THREE.MeshLambertMaterial({color: 0xFFA500}) : new THREE.MeshLambertMaterial({color: 0x00FF25}) ) );
 
       break;
 
