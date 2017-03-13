@@ -16,12 +16,16 @@ messageStruck.chat.addEventListener("keyup", function(event)
 	var coords = shoot.gameToWorld( tiro[ 0 ], tiro[ 1 ] );
 
 	if( tiro.length == 2 && shoot.isShoot( coords ) )
-
-		onCommand( coords );
+	{
+		//onCommand( coords );
+		nouOnCommand( tiro );
+	}
 
 	else if( tiro.length == 3 && tiro[ 1 ] == 1 && tiro[ 2 ] == 0 && shoot.isShoot( shoot.gameToWorld( tiro[ 0 ],  10 ) ) )
-
-		onCommand( shoot.gameToWorld( tiro[ 0 ],  10 ) );
+	{
+		//onCommand( shoot.gameToWorld( tiro[ 0 ],  10 ) );
+		nouOnCommand( tiro[ 0 ], 10);
+	}
 
 	else
 
@@ -31,6 +35,13 @@ messageStruck.chat.addEventListener("keyup", function(event)
 function directShoot( tiro )
 {
 	onCommand( tiro );
+};
+
+function nouOnCommand( tiro )
+{
+	printMsg( shoot.printGame( tiro[0], tiro[1] ), 1);
+	
+	connection.server.sendMessage( JSON.stringify( {type: messageKind.shoot, x: tiro[0], y: tiro[1] } ) );
 };
 
 function onCommand( tiro )

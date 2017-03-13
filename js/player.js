@@ -12,6 +12,11 @@ function Player( name, avatar )
   this.loadBoard();
 };
 
+Player.prototype.isWater = function( x, y )
+{
+  return this.board[x][y] != "a";
+};
+
 Player.prototype.loadBoats = function()
 {
   var size;
@@ -50,7 +55,7 @@ Player.prototype.loadBoard = function()
       this.board[ i ][ j ] = "a";
     }
   }
-  this.fillTable();
+  //this.fillTable();
 };
 
 Player.prototype.fillTable = function()

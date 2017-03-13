@@ -8,7 +8,7 @@ var missatges =
     {
       case messageKind.connect:
 
-      server.sendMessage( JSON.stringify( {type: messageKind.salute, name: player.name, avatar: player.avatar } ) );
+      connection.server.sendMessage( JSON.stringify( {type: messageKind.salute, name: player.name, avatar: player.avatar } ) );
 
       case messageKind.salute:
 
@@ -26,7 +26,11 @@ var missatges =
 
       case messageKind.shoot:
 
-        checkMessage( [ msg.coord.x, msg.coord.y ] );
+        printMsg( shoot.printGame( msg.x, msg.y ), 0);
+
+        var tiro = shoot.gameToBoard(  msg.x, msg.y );
+
+        connection.server.sendMessage( JSON.stringify( {type: messageKind.hitmiss, bool: player.isWater( tiro[0], tiro[1] ) } ) );
 
       break;
 

@@ -9,12 +9,13 @@ function Connection( room_name )
 	this.connect = function()
 	{
 		this.server.connect("84.89.136.194:9000", this.room_name);
+		this.server.on_ready();
 	};
 
 	//this method is called when the user gets connected to the server
 	this.server.on_ready = function( id )
 	{
-		this.server.sendMessage( JSON.stringify( {type: messageKind.connect, name: player.name, avatar: player.avatar } ) );
+		this.sendMessage( JSON.stringify( {type: messageKind.connect, name: player.name, avatar: player.avatar } ) );
 	};
 
 	//this methods receives messages from other users (author_id its an unique identifier)
@@ -28,6 +29,6 @@ function Connection( room_name )
 
 	this.server.on_close = function()
 	{
-		this.server.sendMessage( JSON.stringify( {typer: messageKind.disconect } ) );
+		//this.sendMessage( JSON.stringify( {typer: messageKind.disconect } ) );
 	};
 };

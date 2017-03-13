@@ -67,6 +67,11 @@ var shoot =
     return missatge[0] + "" + missatge[1];
   },
 
+  printGame: function( x, y )
+  {
+    return x.toUpperCase() + "" + y;
+  },
+
   oneShoot: function( x, z )
   {
     var acert =  player.detectShoot( [ x, z ] );
