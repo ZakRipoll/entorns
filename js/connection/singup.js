@@ -11,6 +11,7 @@ function checkCookies()
   start( sessionStorage.room ? sessionStorage.room : sessionStorage.name );
 }
 checkCookies();
+
 document.querySelector('[name = "passwordConfirm"]').addEventListener("keydown", keyDownTextField, false);
 document.getElementById('signup').addEventListener("click", showSignup, false);
 document.querySelector('#submit').addEventListener("click", click, false);

@@ -10,6 +10,8 @@ var missatges =
 
       connection.server.sendMessage( JSON.stringify( {type: messageKind.salute, name: player.name, avatar: player.avatar } ) );
 
+      mytorn = true;
+
       case messageKind.salute:
 
         adversarial = { name: msg.name, avatar: msg.avatar };
@@ -38,11 +40,15 @@ var missatges =
 
         scene.add( debug.createCubeRay( tiro[1], 1, tiro[0], encert ? new THREE.MeshLambertMaterial({color: 0xFFA500}) : new THREE.MeshLambertMaterial({color: 0x00FF25}) ) );
 
+        mytorn = true;
+
       break;
 
       case messageKind.hitmiss:
 
         printHitMiss( msg.bool, shoot.boardToWorld( msg.x, msg.y ) );
+
+        mytorn = false;
 
       break;
 

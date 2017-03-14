@@ -1,4 +1,4 @@
-var pos, c = 0, auxili, me = other = false;
+var pos, c = 0, auxili, me = other = false, mytorn = false;
 
 function comencem()
 {
@@ -19,7 +19,7 @@ function moure(e)
 
 	if ( player.actual == null )
 	{
-		directShoot( [ pos.z, pos.x ] );
+		return;
 	}
 
 	var cell = shoot.worldToBoard( pos.x, pos.z )
@@ -69,8 +69,14 @@ function moure(e)
 function clickar(e)
 {
 	if( !dintreTauler() )
-
+	{
 		return;
+	}
+
+	if ( player.actual == null && mytorn )
+	{
+		return directShoot( [ pos.z, pos.x ] );
+	}
 
 	switch( e.button )
 	{
