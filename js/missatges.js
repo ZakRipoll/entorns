@@ -57,6 +57,14 @@ var missatges =
         //Guardar partida
 
       break;
+
+      case messageKind.start:
+
+        other = true;
+
+        printMsg( "I'm ready ", 0 );
+
+      break;
     };
   }
 };

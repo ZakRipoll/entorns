@@ -1,10 +1,15 @@
-var coords
+var coords;
 messageStruck.chat.addEventListener("keyup", function(event)
 {
 	event.preventDefault();
 
 	if( event.keyCode != 13 || !messageStruck.input.value.length )
 		return;
+
+	if( !me || !other )
+	{
+		sendMsg( messageStruck.input.value, 1 );
+	}
 
 	var tiro = messageStruck.input.value;
 
@@ -21,16 +26,15 @@ messageStruck.chat.addEventListener("keyup", function(event)
 		//onCommand( coords );
 		nouOnCommand( tiro );
 	}
-
 	else if( tiro.length == 3 && tiro[ 1 ] == 1 && tiro[ 2 ] == 0 && shoot.isShoot( shoot.gameToWorld( tiro[ 0 ],  10 ) ) )
 	{
 		//onCommand( shoot.gameToWorld( tiro[ 0 ],  10 ) );
 		nouOnCommand( tiro[ 0 ], 10);
 	}
-
 	else
-
+	{
 		sendMsg( tiro, 1 );
+	}
 });
 
 function directShoot( tiro )
@@ -68,7 +72,7 @@ function checkMessage ( tiro )
 
 function printHitMiss( encert, tiro )
 {
-	printMsg( "It's a " + ( encert ? "hit" : "miss" ) , 0 );
+	printMsg( "It's a " + ( encert ? "hit" : "miss" ), 0 );
 
 	destroy.add( debug.createCubeRay( tiro[1], 1, tiro[0], encert ? new THREE.MeshLambertMaterial({color: 0x990000}) :  new THREE.MeshNormalMaterial() ) );
 };
@@ -87,9 +91,9 @@ function printMsg( message, user )
 	newMessage.querySelector("#Text").innerText = message;
 
 	if( !user )
-
+	{
 		newMessage.querySelector("#ImageContainer").style.float = "left";
-
+	}
 	newMessage.querySelector("#Image").src = user ? player.avatar : adversarial.avatar;
 
 	newMessage.style.display = "block";

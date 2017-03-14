@@ -1,4 +1,16 @@
 var connection
+function checkCookies()
+{
+  if ( sessionStorage.length == 0 )
+  {
+  return;
+  }
+
+  player = new Player( sessionStorage.name, sessionStorage.avatar );
+
+  start( sessionStorage.room ? sessionStorage.room : sessionStorage.name );
+}
+checkCookies();
 document.querySelector('[name = "passwordConfirm"]').addEventListener("keydown", keyDownTextField, false);
 document.getElementById('signup').addEventListener("click", showSignup, false);
 document.querySelector('#submit').addEventListener("click", click, false);
@@ -49,7 +61,13 @@ onSignUp = function()
 
     player = new Player( nomUsuari, imatge );
 
-    start( "room" );
+    sessionStorage.name = nomUsuari;
+
+    sessionStorage.avatar = imatge;
+
+    sessionStorage.room = document.getElementById("room").value;
+
+    start( !document.getElementById("room").value ? player.name : document.getElementById("room").value );
   }
 }
 
@@ -80,7 +98,7 @@ function start(room)
 
   render();
 
-  connection = new Connection( !document.getElementById(room).value ? player.name : document.getElementById(room).value );
+  connection = new Connection( room );
 
   connection.connect();
 }

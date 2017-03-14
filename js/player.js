@@ -70,9 +70,14 @@ Player.prototype.detectShoot = function( tiro )
   return this.board[ tiro[ 0 ] ][ tiro[ 1 ] ];
 };
 
-Player.prototype.maximumBoats = function ()
+Player.prototype.maximumBoats = function()
 {
   return this.boats.length == this.maxBoats;
+};
+
+Player.prototype.endOfGame = function()
+{
+  return this.deadBoats == this.maxBoats;
 };
 
 /* ****************************************************** PER LA CLASSE BOAT ****************************************************** */

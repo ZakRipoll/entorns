@@ -54,8 +54,9 @@ var factory =
 			material = new THREE.MeshPhongMaterial( {map:textureLoader.load( imatge ), wireframe: false } );
 
 			if( imatge.substr(imatge.length - 3) == "png" )
-
+			{
 				material.transparent = true;
+			}
 		}
 
 		var basePlane = new THREE.Mesh( geometry, material );

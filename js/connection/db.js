@@ -13,8 +13,15 @@ function login(user,password, callback)
   firebase.auth().signInWithEmailAndPassword(user + "@lamamadenbambi.cat", password).then(function(user)
   {
 
-  player = new Player(user.email.split("@")[0], user.photoURL);
-  callback( "room1" );
+  player = new Player( user.email.split("@")[0], user.photoURL );
+
+  sessionStorage.name = user.email.split("@")[0];
+
+  sessionStorage.avatar =  user.photoURL;
+
+  sessionStorage.room = document.getElementById("room1").value;
+
+  callback( !document.getElementById("room1").value ? player.name : document.getElementById("room1").value );
 
 }, function(error)
   {

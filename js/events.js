@@ -1,4 +1,4 @@
-var pos, c = 0, auxili;
+var pos, c = 0, auxili, me = other = false;
 
 function comencem()
 {
@@ -6,7 +6,8 @@ function comencem()
 
 	container.addEventListener("click", clickar, false);
 
-	container.oncontextmenu = function () {
+	container.oncontextmenu = function ()
+	{
 		return false;
 	}
 }
@@ -15,6 +16,11 @@ function comencem()
 function moure(e)
 {
 	pos = positionate( raycasting( e.offsetX, e.offsetY ) );
+
+	if ( player.actual == null )
+	{
+		directShoot( [ pos.z, pos.x ] );
+	}
 
 	var cell = shoot.worldToBoard( pos.x, pos.z )
 
@@ -69,14 +75,24 @@ function clickar(e)
 	switch( e.button )
 	{
 		case 0:
-
-			if( player.maximumBoats() || !player.alocateBoard( shoot.worldToBoard( pos.x, pos.z ) ) )
-
+			if( !player.alocateBoard( shoot.worldToBoard( pos.x, pos.z ) ) )
+			{
 				break;
+			}
+			else if( player.maximumBoats() )
+			{
+				player.actual = null;
 
-			player.loadBoats();
+				me = true;
 
-			player.boardPosition( shoot.worldToBoard( pos.x, pos.z ) );
+				connection.server.sendMessage( JSON.stringify( { type: messageKind.start } ) );
+			}
+			else
+			{
+				player.loadBoats();
+
+				player.boardPosition( shoot.worldToBoard( pos.x, pos.z ) );
+			}
 
 		break;
 
@@ -85,12 +101,6 @@ function clickar(e)
 			player.actual.object.rotation.y += -Math.PI * .5;
 
 			player.newRotation();
-
-		break;
-
-		case 2:
-
-			directShoot( [ pos.z, pos.x ] );
 
 		break;
 	};

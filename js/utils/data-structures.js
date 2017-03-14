@@ -15,7 +15,8 @@ var messageKind =
 		shoot: 4,
 		hitmiss: 5,
 		result: 6,
-		disconect: 7
+		disconect: 7,
+		start: 8
 };
 
 var avatar =
