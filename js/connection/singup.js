@@ -10,6 +10,7 @@ function checkCookies()
 
   start( sessionStorage.room ? sessionStorage.room : sessionStorage.name );
 }
+
 checkCookies();
 
 document.querySelector('[name = "passwordConfirm"]').addEventListener("keydown", keyDownTextField, false);
@@ -18,8 +19,10 @@ document.querySelector('#submit').addEventListener("click", click, false);
 
 var selectCharacter = document.querySelectorAll(".icon");
 
-selectCharacter.forEach(function(e){
-  e.onclick = function(){
+selectCharacter.forEach(function(e)
+{
+  e.onclick = function()
+  {
     s = document.querySelector('.selected');
     s.className = "icon";
     this.className = "icon selected";
@@ -66,15 +69,10 @@ onSignUp = function()
 
     sessionStorage.avatar = imatge;
 
-    sessionStorage.room = document.getElementById("room").value;
+    sessionStorage.room = !document.getElementById("room").value ? nomUsuari : document.getElementById("room").value
 
-    start( !document.getElementById("room").value ? player.name : document.getElementById("room").value );
+    start( sessionStorage.room );
   }
-}
-
-function chooseIcon()
-{
-  document.querySelector(".icon").style.border = "thick solid #0000FF";
 }
 
 setProfilePictue = function( imatge, usuari )

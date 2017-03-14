@@ -23,13 +23,11 @@ messageStruck.chat.addEventListener("keyup", function(event)
 
 	if( mytorn && tiro.length == 2 && shoot.isShoot( coords ) )
 	{
-		//onCommand( coords );
 		nouOnCommand( tiro );
 	}
 	else if( mytorn && tiro.length == 3 && tiro[ 1 ] == 1 && tiro[ 2 ] == 0 && shoot.isShoot( shoot.gameToWorld( tiro[ 0 ],  10 ) ) )
 	{
-		//onCommand( shoot.gameToWorld( tiro[ 0 ],  10 ) );
-		nouOnCommand( tiro[ 0 ], 10);
+		nouOnCommand( [ tiro[ 0 ], 10 ] );
 	}
 	else
 	{
@@ -44,23 +42,13 @@ function directShoot( tiro )
 
 function nouOnCommand( tiro )
 {
+	console.log( tiro );
+	
 	mytorn = false;
 
 	printMsg( shoot.printGame( tiro[0], tiro[1] ), 1);
 
 	connection.server.sendMessage( JSON.stringify( {type: messageKind.shoot, x: tiro[0], y: tiro[1] } ) );
-};
-
-function onCommand( tiro )
-{
-	var enfonsar = shoot.oneShoot( tiro[0], tiro[1] );
-	sendMsg( shoot.printShoot( tiro[0], tiro[1] ), 1 );
-	checkMessage( tiro );
-
-	if( enfonsar )
-	{
-		printMsg( "Barco enfonsat", 0 );
-	}
 };
 
 function checkMessage ( tiro )

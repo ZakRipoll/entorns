@@ -1,4 +1,4 @@
-var pos, c = 0, auxili, me = other = false, mytorn = false;
+var pos, c = 0, auxili, me = other = mytorn = false;
 
 function comencem()
 {
@@ -26,7 +26,7 @@ function moure(e)
 
 	var restar = parseInt( player.actual.size*.5 );
 
-	if( player.actual.rotation == 0 || player.actual.rotation == 2 )
+	if( !player.actual.rotation % 2 )
 	{
 		if(  cell[0] > restar - (player.actual.size%2) && cell[0] < 10 - restar )
 		{
@@ -40,7 +40,7 @@ function moure(e)
 
 	player.actual.object.position.y = dimensio * 5;
 
-	if( player.actual.rotation == 1 || player.actual.rotation == 3 )
+	if( player.actual.rotation % 2 )
 	{
 		if( cell[1] > restar - (player.actual.size%2) && cell[1] < 10 - parseInt( player.actual.size*.5 ) )
 		{
@@ -74,6 +74,8 @@ function clickar(e)
 			}
 			else if( player.maximumBoats() )
 			{
+				player.boardPosition( shoot.worldToBoard( pos.x, pos.z ) );
+
 				player.actual = null;
 
 				me = true;

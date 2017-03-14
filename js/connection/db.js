@@ -34,7 +34,6 @@ function login(user,password, callback)
 }
 function signup(user, password, imatge, callback)
 {
-  //signOut();
   firebase.auth().createUserWithEmailAndPassword(user + "@lamamadenbambi.cat", password).then(function(user) {
   callback( imatge, user);
 }, function(error)
@@ -44,13 +43,4 @@ function signup(user, password, imatge, callback)
     var errorMessage = error.message;
     // ...
   });
-}
-
-function signout()
-{
-  firebase.auth().signOut().then(function() {
-  // Sign-out successful.
-}, function(error) {
-  // An error happened.
-});
 }

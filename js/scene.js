@@ -13,8 +13,6 @@ function init()
 
 	textureLoader = new THREE.TextureLoader();
 
-	//player = new Player( "iZac", avatar.brook );
-
 	player.loadBoats();
 
 	printMsg( "Hello, " + player.name, 1 );

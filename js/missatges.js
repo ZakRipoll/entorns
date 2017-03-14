@@ -63,6 +63,8 @@ var missatges =
 
         printMsg( "You win", 0 );
 
+        document.getElementById( "loginContainer" ).style.display = "flex";
+
       break;
 
       case messageKind.disconect:

@@ -30,6 +30,8 @@ Player.prototype.isWater = function( x, y )
         printMsg( "You lose", 1 );
 
         connection.server.sendMessage( JSON.stringify( { type: messageKind.result } ) );
+
+        document.getElementById( "loginContainer" ).style.display = "flex";
       }
     }
   }
