@@ -22,20 +22,15 @@ function moure(e)
 		return;
 	}
 
-	var cell = shoot.worldToBoard( pos.x, pos.z )
+	var cell = shoot.worldToBoard( pos.x, pos.z );
 
-	if( player.actual.rotation == 0 )
+	var restar = parseInt( player.actual.size*.5 );
+
+	if( player.actual.rotation == 0 || player.actual.rotation == 2 )
 	{
-		if( cell[0] >	parseInt( player.actual.size *.5 - !( player.actual.size % 2 ) ) )
+		if(  cell[0] > restar - (player.actual.size%2) && cell[0] < 10 - restar )
 		{
-			player.actual.object.position.x = onTauler( pos.x ) - player.actual.lenght;
-		}
-	}
-	else if( player.actual.rotation == 2 )
-	{
-		if( cell[0] < 8 )
-		{
-			player.actual.object.position.x = onTauler( pos.x ) + player.actual.lenght;
+			player.actual.object.position.x = onTauler( pos.x );
 		}
 	}
 	else
@@ -43,19 +38,11 @@ function moure(e)
 		player.actual.object.position.x = onTauler( pos.x );
 	}
 
-
 	player.actual.object.position.y = dimensio * 5;
 
-	if( player.actual.rotation == 1 )
+	if( player.actual.rotation == 1 || player.actual.rotation == 3 )
 	{
-		if( cell[1] > 1 )
-		{
-			player.actual.object.position.z = onTauler( pos.z ) - player.actual.lenght;
-		}
-	}
-	else if( player.actual.rotation == 3 )
-	{
-		if( cell[1] < 8 )
+		if( cell[1] > restar - (player.actual.size%2) && cell[1] < 10 - parseInt( player.actual.size*.5 ) )
 		{
 			player.actual.object.position.z = onTauler( pos.z ) + player.actual.lenght;
 		}
@@ -73,7 +60,7 @@ function clickar(e)
 		return;
 	}
 
-	if ( player.actual == null && mytorn )
+	if ( player.actual == null && mytorn && me && other )
 	{
 		return directShoot( [ pos.z, pos.x ] );
 	}
@@ -95,9 +82,9 @@ function clickar(e)
 			}
 			else
 			{
-				player.loadBoats();
-
 				player.boardPosition( shoot.worldToBoard( pos.x, pos.z ) );
+
+				player.loadBoats();
 			}
 
 		break;
@@ -129,7 +116,7 @@ function raycasting( x, y )
 	return { x: intersects[ 0 ].point.x, z: intersects[ 0 ].point.z }
 };
 
-/* *********************************************** POSITIONATE IN THE BOARD *********************************************** */
+/* ********************************************** POSITIONATE IN THE BOARD ********************************************** */
 function onTauler( coord )
 {
 	if( coord > 500 )

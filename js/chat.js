@@ -72,9 +72,9 @@ function checkMessage ( tiro )
 		connection.server.sendMessage( JSON.stringify( { type: messageKind.hitmis, bool: encert } ) );
 };
 
-function printHitMiss( encert, tiro )
+function printHitMiss( encert, tiro, name )
 {
-	printMsg( "It's a " + ( encert ? "hit" : "miss" ), 0 );
+	printMsg( ( encert ? "Hit. " + name + "." : "Miss" ), 0 );
 
 	destroy.add( debug.createCubeRay( tiro[1], 1, tiro[0], encert ? new THREE.MeshLambertMaterial({color: 0x990000}) :  new THREE.MeshNormalMaterial() ) );
 };

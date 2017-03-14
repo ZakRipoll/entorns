@@ -83,19 +83,25 @@ var factory =
 					if( size == 2 )
 					{
 						child.scale.x = .6;
+						name = "Destroyer";
 					}
 					else if( size == 4 )
 					{
 						child.scale.x = 1.4;
 						child.scale.z = 1.1;
+						name = "Battleship";
 					}
 					else if( size == 5 )
 					{
 						child.scale.x = 1.8;
 						child.scale.z = 1.2;
+						name = "Carrier";
+					}
+					else
+					{
+						name = Math.random()%2 ? "Submarine" : "Cruiser";
 					}
 				}
-				object.name = name;
 			});
 
 			that.boats.push( new Boat( object, size, name, new THREE.Box3().setFromObject( object ).size(), id ) );

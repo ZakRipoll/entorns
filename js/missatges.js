@@ -28,13 +28,20 @@ var missatges =
 
       case messageKind.shoot:
 
+        var name;
+
         printMsg( shoot.printGame( msg.x, msg.y ), 0);
 
-        var tiro = shoot.gameToBoard(  msg.x, msg.y );
+        var tiro = shoot.gameToBoard( msg.x, msg.y );
 
         var encert = player.isWater( tiro[0], tiro[1] );
 
-        connection.server.sendMessage( JSON.stringify( {type: messageKind.hitmiss, bool: encert, x: tiro[0], y: tiro[1] } ) );
+        if( encert )
+        {
+          name = player.boats[ player.board[ tiro[0] ][ tiro[1] ] ].name
+        }
+
+        connection.server.sendMessage( JSON.stringify( {type: messageKind.hitmiss, bool: encert, x: tiro[0], y: tiro[1], name: name } ) );
 
         tiro = shoot.boardToWorld( tiro[0], tiro[1] );
 
@@ -46,7 +53,7 @@ var missatges =
 
       case messageKind.hitmiss:
 
-        printHitMiss( msg.bool, shoot.boardToWorld( msg.x, msg.y ) );
+        printHitMiss( msg.bool, shoot.boardToWorld( msg.x, msg.y ), msg.name );
 
         mytorn = false;
 
@@ -54,7 +61,7 @@ var missatges =
 
       case messageKind.result:
 
-        //Acabar partida
+        printMsg( "You win", 0 );
 
       break;
 

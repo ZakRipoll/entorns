@@ -3,7 +3,7 @@ function checkCookies()
 {
   if ( sessionStorage.length == 0 )
   {
-  return;
+    return;
   }
 
   player = new Player( sessionStorage.name, sessionStorage.avatar );

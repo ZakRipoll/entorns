@@ -6,7 +6,7 @@ function Player( name, avatar )
 
   this.boats = new Array();
   this.actual = null;
-  this.maxBoats = 11;
+  this.maxBoats = 10;
   this.deadBoats = 0;
 
   this.loadBoard();
@@ -14,6 +14,25 @@ function Player( name, avatar )
 
 Player.prototype.isWater = function( x, y )
 {
+  if( this.board[x][y] != "a" )
+  {
+    this.boats[ this.board[x][y] ].setDamage();
+
+    if( this.boats[ this.board[x][y] ].isDead() )
+    {
+      this.deadBoats++;
+
+      connection.server.sendMessage( JSON.stringify( { type: messageKind.message, message: "" } ) );
+
+
+      if( this.deadBoats == this.maxBoats )
+      {
+        printMsg( "You lose", 1 );
+
+        connection.server.sendMessage( JSON.stringify( { type: messageKind.result } ) );
+      }
+    }
+  }
   return this.board[x][y] != "a";
 };
 
@@ -41,10 +60,11 @@ Player.prototype.loadBoats = function()
     default:
       size = 2;
   }
-
-  factory.createBoat( 'imatges/boat.obj', "Boat", this, size, this.boats.length );
-
-  if( this.maximumBoats() )
+  if( !this.maximumBoats() )
+  {
+    factory.createBoat( 'imatges/boat.obj', "Boat", this, size, this.boats.length );
+  }
+  else
   {
     this.actual = null;
   }
@@ -91,10 +111,10 @@ Player.prototype.boardPosition = function( tiro )
 
       if ( z < this.actual.size )
       {
-        z = this.actual.size;
+        z = this.actual.size - 1;
       }
 
-      for( var i = 0; i < this.actual.size; ++i )
+      for( var i = 0; i < this.actual.size; i++ )
       {
         this.board[ x ][ z ] = this.actual.id;
         z--;
@@ -106,10 +126,10 @@ Player.prototype.boardPosition = function( tiro )
 
       if ( x < this.actual.size )
       {
-        x = this.actual.size;
+        x = this.actual.size - 1;
       }
 
-      for( var i = 0; i < this.actual.size; ++i )
+      for( var i = 0; i < this.actual.size; i++ )
       {
         this.board[ x ][ z ] = this.actual.id;
         x--;
@@ -124,7 +144,7 @@ Player.prototype.boardPosition = function( tiro )
         z = 10 - this.actual.size
       }
 
-      for( var i = 0; i < this.actual.size; ++i )
+      for( var i = 0; i < this.actual.size; i++ )
       {
         this.board[ x ][ z ] = this.actual.id;
         z++;
@@ -139,7 +159,7 @@ Player.prototype.boardPosition = function( tiro )
         x = 10 - this.actual.size;
       }
 
-      for( var i = 0; i < this.actual.size; ++i )
+      for( var i = 0; i < this.actual.size; i++ )
       {
         this.board[ x ][ z ] = this.actual.id;
         x++;
@@ -239,5 +259,5 @@ Player.prototype.newRotation = function()
 
 Player.prototype.allDeath = function()
 {
-  return this.deadBoats == this.maximumBoats;
+  return this.deadBoats+1 == this.maximumBoats;
 }
