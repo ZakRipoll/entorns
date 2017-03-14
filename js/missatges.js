@@ -45,7 +45,8 @@ var missatges =
 
         tiro = shoot.boardToWorld( tiro[0], tiro[1] );
 
-        scene.add( debug.createCubeRay( tiro[1], 1, tiro[0], encert ? new THREE.MeshLambertMaterial({color: 0xFFA500}) : new THREE.MeshLambertMaterial({color: 0x00FF25}) ) );
+        //scene.add( debug.createCubeRay( tiro[1], 1, tiro[0], encert ? new THREE.MeshLambertMaterial({color: 0xFFA500}) : new THREE.MeshLambertMaterial({color: 0x00FF25}) ) );
+        scene.add( factory.createCylinder( tiro[1], tiro[0], encert ? new THREE.MeshLambertMaterial({color: 0xff0000}) :  new THREE.MeshLambertMaterial({color: 0xffffff}) ) );
 
         mytorn = true;
 
@@ -62,8 +63,8 @@ var missatges =
       case messageKind.result:
 
         printMsg( "You win", 0 );
-
-        document.getElementById( "loginContainer" ).style.display = "flex";
+        document.getElementById( "final" ).sstyle.backgroundImage = "url('../imatges/win.png')";
+        document.getElementById( "final" ).style.display = "flex";
 
       break;
 

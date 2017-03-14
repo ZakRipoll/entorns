@@ -110,5 +110,12 @@ var factory =
 
 			scene.add( that.actual.object );
 		});
+	},
+
+	createCylinder: function(x, y, material)
+	{
+		var cilindre =  new THREE.Mesh( new THREE.CylinderGeometry(25,25,100), material );
+		cilindre.position.set( x, 1, y);
+		return cilindre;
 	}
 };

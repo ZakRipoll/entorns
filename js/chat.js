@@ -43,7 +43,7 @@ function directShoot( tiro )
 function nouOnCommand( tiro )
 {
 	console.log( tiro );
-	
+
 	mytorn = false;
 
 	printMsg( shoot.printGame( tiro[0], tiro[1] ), 1);
@@ -64,7 +64,8 @@ function printHitMiss( encert, tiro, name )
 {
 	printMsg( ( encert ? "Hit. " + name + "." : "Miss" ), 0 );
 
-	destroy.add( debug.createCubeRay( tiro[1], 1, tiro[0], encert ? new THREE.MeshLambertMaterial({color: 0x990000}) :  new THREE.MeshNormalMaterial() ) );
+	//destroy.add( debug.createCubeRay( tiro[1], 1, tiro[0], encert ? new THREE.MeshLambertMaterial({color: 0x990000}) :  new THREE.MeshNormalMaterial() ) );
+	destroy.add( factory.createCylinder( tiro[1], tiro[0], encert ? new THREE.MeshLambertMaterial({color: 0xff0000}) :  new THREE.MeshLambertMaterial({color: 0xffffff}) ) );
 };
 
 function sendMsg( msg )

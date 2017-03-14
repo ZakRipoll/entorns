@@ -28,7 +28,7 @@ function moure(e)
 
 	if( !player.actual.rotation % 2 )
 	{
-		if(  cell[0] > restar - (player.actual.size%2) && cell[0] < 10 - restar )
+		if(  cell[0] > restar - 1 && cell[0] < 10 - restar )
 		{
 			player.actual.object.position.x = onTauler( pos.x );
 		}
@@ -42,7 +42,7 @@ function moure(e)
 
 	if( player.actual.rotation % 2 )
 	{
-		if( cell[1] > restar - (player.actual.size%2) && cell[1] < 10 - parseInt( player.actual.size*.5 ) )
+		if( cell[1] > restar - 1 && cell[1] < 10 - restar )
 		{
 			player.actual.object.position.z = onTauler( pos.z ) + player.actual.lenght;
 		}

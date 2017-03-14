@@ -31,7 +31,8 @@ Player.prototype.isWater = function( x, y )
 
         connection.server.sendMessage( JSON.stringify( { type: messageKind.result } ) );
 
-        document.getElementById( "loginContainer" ).style.display = "flex";
+        document.getElementById( "final" ).sstyle.backgroundImage = "url('../imatges/lose.png')";
+        document.getElementById( "final" ).style.display = "flex";
       }
     }
   }
