@@ -56,7 +56,7 @@ function init()
 
 	camera = factory.createCamera( 45, SCREEN_WIDTH / SCREEN_HEIGHT, 1000, 3000);
 
-	camera.position.set( 0, SCREEN_HEIGHT * 2, 0 );
+	camera.position.set(0, SCREEN_HEIGHT * 2 + 100, 0 );
 
 	camera.lookAt( desk.getObjectByName( "tauler" ).position );
 };

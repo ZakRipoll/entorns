@@ -12,6 +12,23 @@ body
   overflow: hidden;
 }
 
+#information
+{
+    width: 100%;
+    height: 10%;
+}
+
+.informationField
+{
+  padding: 1px;
+}
+
+#alocate, #battle
+{
+  display: none;
+}
+
+
 #loginContainer
 {
   width: 100vw;

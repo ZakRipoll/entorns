@@ -26,11 +26,18 @@ function moure(e)
 
 	var restar = parseInt( player.actual.size*.5 );
 
-	if( !player.actual.rotation % 2 )
+	if( player.actual.rotation % 2 == 0)
 	{
 		if(  cell[0] > restar - 1 && cell[0] < 10 - restar )
 		{
-			player.actual.object.position.x = onTauler( pos.x );
+			player.actual.object.position.x = onTauler( pos.x - !(player.actual.size%2));
+		}
+	}
+	else if( player.actual.rotation  == 2)
+	{
+		if(  cell[0] > restar && cell[0] < 10 - restar )
+		{
+			player.actual.object.position.x = onTauler( pos.x - !(player.actual.size%2) );
 		}
 	}
 	else
@@ -42,9 +49,9 @@ function moure(e)
 
 	if( player.actual.rotation % 2 )
 	{
-		if( cell[1] > restar - 1 && cell[1] < 10 - restar )
+		if( cell[1] > restar - 1 && cell[1] < 10 - restar)
 		{
-			player.actual.object.position.z = onTauler( pos.z ) + player.actual.lenght;
+			player.actual.object.position.z = onTauler( pos.z - !(player.actual.size%2)*2)
 		}
 	}
 	else
@@ -81,6 +88,9 @@ function clickar(e)
 				me = true;
 
 				connection.server.sendMessage( JSON.stringify( { type: messageKind.start } ) );
+
+				document.getElementById( "alocate" ).style.display = "none";
+				document.getElementById( "battle" ).style.display = "inline";
 			}
 			else
 			{
@@ -93,9 +103,7 @@ function clickar(e)
 
 		case 1:
 
-			player.actual.object.rotation.y += -Math.PI * .5;
-
-			player.newRotation();
+			turnRight();
 
 		break;
 	};
@@ -145,3 +153,17 @@ function dintreTauler( )
 {
 	return ( -500 < Math.abs( pos.x ) && Math.abs( pos.x ) < 500 && -500 < Math.abs( pos.z ) && Math.abs( pos.z ) < 500 );
 };
+
+function turnRight()
+{
+	player.actual.object.rotation.y += -Math.PI * .5;
+
+	player.newRotation();
+}
+
+function turnLeft()
+{
+	turnRight();
+	turnRight();
+	turnRight();
+}

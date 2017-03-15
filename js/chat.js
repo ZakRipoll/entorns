@@ -15,8 +15,7 @@ messageStruck.chat.addEventListener("keyup", function(event)
 
 	if( tiro == "escena" )
 	{
-		actualdesk = !actualdesk;
-		return;
+		changeSceene();
 	};
 
 	var coords = shoot.gameToWorld( tiro[ 0 ], tiro[ 1 ] );
@@ -95,3 +94,9 @@ function printMsg( message, user )
 
 	messageStruck.messages.scrollTop = messageStruck.messages.scrollHeight;
 };
+
+function changeSceene()
+{
+	actualdesk = !actualdesk;
+	return;
+}

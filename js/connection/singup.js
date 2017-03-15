@@ -91,6 +91,10 @@ function start(room)
 {
   document.getElementById( "loginContainer" ).style.display = "none";
 
+  document.getElementById( "loginsigin" ).style.display = "none";
+
+  document.getElementById( "alocate" ).style.display = "inline";
+
   init();
 
   comencem();
