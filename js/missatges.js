@@ -63,6 +63,7 @@ var missatges =
       case messageKind.result:
 
         printMsg( "You win", 0 );
+        destroy.add( factory.createCylinder( tiro[1], tiro[0],new THREE.MeshLambertMaterial({color: 0x990000}) ) );
         document.getElementById( "final" ).sstyle.backgroundImage = "url('../imatges/win.png')";
         document.getElementById( "final" ).style.display = "flex";
 

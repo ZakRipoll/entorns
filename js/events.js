@@ -28,16 +28,16 @@ function moure(e)
 
 	if( player.actual.rotation % 2 == 0)
 	{
-		if(  cell[0] > restar - 1 && cell[0] < 10 - restar )
+		if(  cell[0] > restar - 1 && cell[0] < 10 - restar + !(player.actual.size%2) )
 		{
-			player.actual.object.position.x = onTauler( pos.x - !(player.actual.size%2));
+			player.actual.object.position.x = onTauler( pos.x );
 		}
 	}
 	else if( player.actual.rotation  == 2)
 	{
-		if(  cell[0] > restar && cell[0] < 10 - restar )
+		if( cell[0] > restar - 1 && cell[0] < 10 - restar )//- !(player.actual.size%2)	 )
 		{
-			player.actual.object.position.x = onTauler( pos.x - !(player.actual.size%2) );
+			player.actual.object.position.x = onTauler( pos.x );
 		}
 	}
 	else
@@ -47,11 +47,18 @@ function moure(e)
 
 	player.actual.object.position.y = dimensio * 5;
 
-	if( player.actual.rotation % 2 )
+	if( player.actual.rotation == 1 )
 	{
-		if( cell[1] > restar - 1 && cell[1] < 10 - restar)
+		if( cell[1] > restar - 1 && cell[1] < 10 - restar + !(player.actual.size%2) )
 		{
-			player.actual.object.position.z = onTauler( pos.z - !(player.actual.size%2)*2)
+			player.actual.object.position.z = onTauler( pos.z );
+		}
+	}
+	else if( player.actual.rotation == 3 )
+	{
+		if( cell[1] > restar - 2 && cell[1] < 10 - restar )// +!(player.actual.size%2)*2 )
+		{
+			player.actual.object.position.z = onTauler( pos.z );
 		}
 	}
 	else

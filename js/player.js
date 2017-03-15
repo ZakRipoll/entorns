@@ -29,6 +29,8 @@ Player.prototype.isWater = function( x, y )
       {
         printMsg( "You lose", 1 );
 
+        scene.add( factory.createCylinder( tiro[1], tiro[0],new THREE.MeshLambertMaterial({color: 0x990000}) ) );
+
         connection.server.sendMessage( JSON.stringify( { type: messageKind.result } ) );
 
         document.getElementById( "final" ).sstyle.backgroundImage = "url('../imatges/lose.png')";
